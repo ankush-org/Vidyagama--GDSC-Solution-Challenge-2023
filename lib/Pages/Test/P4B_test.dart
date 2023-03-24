@@ -39,6 +39,7 @@ class _TestPageState extends State<TestPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFF201c1c),
       body: Consumer(
         builder: (context, ref, child) {
           mcq = ref.watch(mcqQuestion);

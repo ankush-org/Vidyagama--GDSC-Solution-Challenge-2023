@@ -7,5 +7,9 @@ final userPassword = StateProvider((ref) => 'null');
 //Provider for handling the index of bottom navigation bar
 final bottomBarindexProvider = StateProvider((ref) => 0);
 
+//Home
+final resumeVideo = StateProvider((ref) => '0');
+
+//Test
 //Question String
 final mcqQuestion = StateProvider((ref) => 'Processing Question');

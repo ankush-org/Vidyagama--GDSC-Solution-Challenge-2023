@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gsc/Pages/Auth/P0_startup.dart';
 import '../Backend/Routes/app_route_config.dart';
-import '../Pages/Test/P4B_test.dart';
-import './TMP/p0.dart';
 
 void main(List<String> args) {
   runApp(
@@ -19,7 +18,7 @@ class BaseMaterialApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: P0(),
+      home: InitPage(),
     );
     // MaterialApp.router(
     //   debugShowCheckedModeBanner: false,
