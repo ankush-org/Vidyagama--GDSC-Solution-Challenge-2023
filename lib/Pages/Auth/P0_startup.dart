@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../Backend/Data/state_management.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:gsc/main.dart';
 
 class InitPage extends ConsumerStatefulWidget {
   const InitPage({super.key});
@@ -17,11 +18,30 @@ class _P0State extends ConsumerState<InitPage> {
   final _textControllerPassword = TextEditingController();
 
   //Auth
+  // final user = FirebaseAuth.instance.currentUser;
+
   Future signIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: ref.read(userEmail).toString(),
-      password: ref.read(userPassword).toString(),
+    //sign-in loading dialog
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => const Center(
+        child: CircularProgressIndicator(),
+      ),
     );
+
+    //sign-in logic
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: ref.read(userEmail).toString(),
+        password: ref.read(userPassword).toString(),
+      );
+    } on FirebaseAuthException catch (e) {
+      print(e);
+    }
+
+    //post sign-in
+    navigatorKey.currentState!.popUntil((route) => route.isFirst);
   }
 
   //Dispose()

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -14,6 +15,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final homeUser = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -24,7 +26,22 @@ class _HomeState extends State<Home> {
           automaticallyImplyLeading: false,
         ),
         //UI
-        body: Placeholder(),
+        body: Center(
+            child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(homeUser!.email.toString()),
+            Padding(
+              padding: const EdgeInsets.all(2.0),
+              child: ElevatedButton.icon(
+                  onPressed: () {
+                    FirebaseAuth.instance.signOut();
+                  },
+                  icon: const Icon(Icons.email),
+                  label: const Text('Sign-Out')),
+            )
+          ],
+        )),
         //
         bottomNavigationBar: Consumer(
           builder: (context, ref, child) {

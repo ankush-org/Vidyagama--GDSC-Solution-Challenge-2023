@@ -17,20 +17,28 @@ Future main() async {
   );
 }
 
+final navigatorKey = GlobalKey<NavigatorState>(); //used for nav auth
+
 class BaseMaterialApp extends StatelessWidget {
   const BaseMaterialApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
       home: StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return Home();
+            return const Home();
+          } else if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return const Center(child: Text(("errer")));
+          } else {
+            return const InitPage();
           }
-          return InitPage();
         },
       ),
     );

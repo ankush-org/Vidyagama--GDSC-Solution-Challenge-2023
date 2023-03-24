@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -26,8 +27,8 @@ class _h01State extends State<h01> {
             Padding(
               padding: const EdgeInsets.only(left: 22, top: 50),
               child: RichText(
-                text: const TextSpan(
-                  text: "Hello, Ankush !",
+                text: TextSpan(
+                  // text: ,
                   style: TextStyle(
                     color: Colors.black87,
                     fontSize: 40,
