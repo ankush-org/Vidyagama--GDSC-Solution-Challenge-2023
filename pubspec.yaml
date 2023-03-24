@@ -41,6 +41,8 @@ dependencies:
   go_router: ^6.2.0
   google_nav_bar: ^5.0.6
   flutter_riverpod: ^2.3.1
+  cloud_firestore: ^4.4.5
+  firebase_auth: ^4.3.0
 
 dev_dependencies:
   flutter_test:

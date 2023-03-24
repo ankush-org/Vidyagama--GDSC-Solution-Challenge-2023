@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../Backend/Data/state_management.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class InitPage extends ConsumerStatefulWidget {
   const InitPage({super.key});
@@ -14,6 +16,15 @@ class _P0State extends ConsumerState<InitPage> {
   final _textControllerEmail = TextEditingController();
   final _textControllerPassword = TextEditingController();
 
+  //Auth
+  Future signIn() async {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: ref.read(userEmail).toString(),
+      password: ref.read(userPassword).toString(),
+    );
+  }
+
+  //Dispose()
   @override
   void dispose() {
     // _textControllerEmail.dispose();
@@ -21,6 +32,7 @@ class _P0State extends ConsumerState<InitPage> {
     super.dispose();
   }
 
+  //Scaffold
   @override
   Widget build(BuildContext context) {
     //TMP Vars
@@ -85,7 +97,9 @@ class _P0State extends ConsumerState<InitPage> {
               Padding(
                 padding: const EdgeInsets.all(2.0),
                 child: ElevatedButton.icon(
-                    onPressed: () {},
+                    onPressed: () {
+                      signIn();
+                    },
                     icon: const Icon(Icons.email),
                     label: const Text('Sign-in')),
               ),

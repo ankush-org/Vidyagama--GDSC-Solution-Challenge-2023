@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "39123819215",
+    "project_id": "gsc23-6afcc",
+    "storage_bucket": "gsc23-6afcc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:39123819215:android:91e35d54166d9e66f935ba",
+        "android_client_info": {
+          "package_name": "com.ankush.gsc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "39123819215-kdmq2bttrj5it2e2veapr3if7u16a7i9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCf7WGEoOXKMvmLvAZGq6VnTnBOeyTUF5o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "39123819215-kdmq2bttrj5it2e2veapr3if7u16a7i9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
