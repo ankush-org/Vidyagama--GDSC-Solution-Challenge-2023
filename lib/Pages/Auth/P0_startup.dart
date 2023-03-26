@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../Backend/Data/state_management.dart';
@@ -123,19 +124,33 @@ class _P0State extends ConsumerState<InitPage> {
                     icon: const Icon(Icons.email),
                     label: const Text('Sign-in')),
               ),
-              Padding(
-                padding: const EdgeInsets.all(2.0),
-                child: ElevatedButton.icon(
-                    onPressed: () {},
-                    icon: const Icon(Icons.email),
-                    label: const Text('Sign-Up')),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(2.0),
-                child: ElevatedButton.icon(
-                    onPressed: () {},
-                    icon: const Icon(Icons.email),
-                    label: const Text('Sign-Out')),
+              // Padding(
+              //   padding: const EdgeInsets.all(2.0),
+              //   child: ElevatedButton.icon(
+              //       onPressed: () {},
+              //       icon: const Icon(Icons.email),
+              //       label: const Text('Sign-Up')),
+              // ),
+              // Padding(
+              //   padding: const EdgeInsets.all(2.0),
+              //   child: ElevatedButton.icon(
+              //       onPressed: () {},
+              //       icon: const Icon(Icons.email),
+              //       label: const Text('Sign-Out')),
+              // )
+              RichText(
+                text: const TextSpan(
+                  text: 'No Account?',
+                  children: [
+                    TextSpan(
+                        // recognizer: TapGestureRecognizer()..onTap = widget.onClickedSignUp,
+                        text: 'Sign Up',
+                        style: TextStyle(
+                          decoration: TextDecoration.underline,
+                          color: Colors.blue,
+                        ))
+                  ],
+                ),
               )
             ],
           ),
