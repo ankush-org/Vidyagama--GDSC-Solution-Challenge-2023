@@ -21,27 +21,30 @@ class _HomeState extends State<Home> {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text("Home"),
-          automaticallyImplyLeading: false,
-        ),
+        //@Arman - Start
         //UI
-        body: Center(
-            child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(homeUser!.email.toString()),
-            Padding(
-              padding: const EdgeInsets.all(2.0),
-              child: ElevatedButton.icon(
-                  onPressed: () {
-                    FirebaseAuth.instance.signOut();
-                  },
-                  icon: const Icon(Icons.email),
-                  label: const Text('Sign-Out')),
-            )
-          ],
-        )),
+        body: Center(),
+        //@Arman - end
+        //
+        //
+        //Auth *Do Not Touch*
+        //     Center(
+        //   child: Column(
+        //     mainAxisAlignment: MainAxisAlignment.center,
+        //     children: [
+        //       Text(homeUser!.email.toString()),
+        //       Padding(
+        //         padding: const EdgeInsets.all(2.0),
+        //         child: ElevatedButton.icon(
+        //             onPressed: () {
+        //               FirebaseAuth.instance.signOut();
+        //             },
+        //             icon: const Icon(Icons.email),
+        //             label: const Text('Sign-Out')),
+        //       )
+        //     ],
+        //   ),
+        // ),
         //
         bottomNavigationBar: Consumer(
           builder: (context, ref, child) {
