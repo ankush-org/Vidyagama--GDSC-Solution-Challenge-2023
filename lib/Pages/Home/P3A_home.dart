@@ -23,29 +23,161 @@ class _HomeState extends State<Home> {
       child: Scaffold(
         //@Arman - Start
         //UI
-        body:
-            // Center(),
-            //@Arman - end
-            //
-            //
-            //Auth *Do Not Touch*
-            Center(
+        appBar: AppBar(
+            backgroundColor: Colors.black,
+            toolbarHeight: 60,
+            title: const Text(
+              "Namaste",
+              style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+            )),
+        body: Container(
+          color: Colors.black,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(homeUser!.email.toString()),
-              Padding(
-                padding: const EdgeInsets.all(2.0),
-                child: ElevatedButton.icon(
-                    onPressed: () {
-                      FirebaseAuth.instance.signOut();
-                    },
-                    icon: const Icon(Icons.email),
-                    label: const Text('Sign-Out')),
-              )
+              Container(
+                  height: 50,
+                  width: 400,
+                  padding: EdgeInsets.only(top: 10),
+                  color: Colors.black,
+                  child: Text(
+                    "Your Battle Arena",
+                    style: TextStyle(
+                        fontSize: 25,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                  )),
+              Container(
+                height: 200,
+                margin: EdgeInsets.only(left: 5, right: 5),
+                decoration: BoxDecoration(
+                    color: Color.fromARGB(250, 207, 247, 123),
+                    borderRadius: BorderRadius.circular(20)),
+              ),
+              Container(
+                padding: EdgeInsets.only(left: 10, top: 20),
+                height: 60,
+                width: 400,
+                color: Colors.black,
+                child: Text(
+                  "Your Cources",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+              Center(
+                child: SafeArea(
+                  child: Stack(
+                    children: [
+                      Container(
+                        alignment: Alignment.bottomLeft,
+                        height: 190,
+                        width: 190,
+                        child: Image.asset("lib/assets/math.jpg"),
+                      ),
+                      Positioned.fill(
+                        child: Align(
+                          alignment: Alignment.bottomLeft,
+                          child: Container(
+                            height: 90,
+                            width: 200,
+                            padding: EdgeInsets.only(top: 20),
+                            child: Text(
+                              "algebra ",
+                              style:
+                                  TextStyle(fontSize: 20, color: Colors.white),
+                            ),
+                            decoration: BoxDecoration(
+                                color: Colors.black,
+                                border: Border(
+                                    bottom: BorderSide(
+                                        color: Color.fromARGB(255, 70, 147, 72),
+                                        width: 3)),
+                                gradient: LinearGradient(
+                                  begin: Alignment.bottomCenter,
+                                  end: Alignment.topCenter,
+                                  colors: [
+                                    Colors.black,
+                                    Color.fromARGB(242, 0, 0, 0),
+                                    Color.fromARGB(221, 25, 24, 24),
+                                    Color.fromARGB(36, 25, 24, 24),
+                                  ],
+                                )),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Container(
+                height: 60,
+                child: Text(
+                  "Math",
+                  style: TextStyle(
+                      fontSize: 25,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+              Row(
+                children: [
+                  Padding(padding: EdgeInsets.only(left: 5, right: 5)),
+                  Container(
+                    color: Color.fromARGB(176, 54, 53, 53),
+                    height: 60,
+                    child: Image.asset("lib/assets/math.png"),
+                  ),
+                  Container(
+                    color: Color.fromARGB(176, 54, 53, 53),
+                    height: 60,
+                    width: 250,
+                    child: const Text("ALGEBRA",
+                        style: TextStyle(
+                            letterSpacing: 1,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white)),
+                  ),
+                  Container(
+                    height: 60,
+                    width: 60,
+                    color: Color.fromARGB(176, 54, 53, 53),
+                    child: Icon(
+                      Icons.play_arrow,
+                      size: 40,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
+
+        //@Arman - end
+        //
+        //
+        //Auth *Do Not Touch*
+        //     Center(
+        //   child: Column(
+        //     mainAxisAlignment: MainAxisAlignment.center,
+        //     children: [
+        //       Text(homeUser!.email.toString()),
+        //       Padding(
+        //         padding: const EdgeInsets.all(2.0),
+        //         child: ElevatedButton.icon(
+        //             onPressed: () {
+        //               FirebaseAuth.instance.signOut();
+        //             },
+        //             icon: const Icon(Icons.email),
+        //             label: const Text('Sign-Out')),
+        //       )
+        //     ],
+        //   ),
+        // ),
         //
         bottomNavigationBar: Consumer(
           builder: (context, ref, child) {
