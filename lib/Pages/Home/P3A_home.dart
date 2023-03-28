@@ -21,7 +21,6 @@ class _HomeState extends State<Home> {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-        //@Arman - Start
         //UI
         appBar: AppBar(
             backgroundColor: Colors.black,
@@ -38,9 +37,9 @@ class _HomeState extends State<Home> {
               Container(
                   height: 50,
                   width: 400,
-                  padding: EdgeInsets.only(top: 10),
+                  padding: const EdgeInsets.only(top: 10),
                   color: Colors.black,
-                  child: Text(
+                  child: const Text(
                     "Your Battle Arena",
                     style: TextStyle(
                         fontSize: 25,
@@ -49,17 +48,17 @@ class _HomeState extends State<Home> {
                   )),
               Container(
                 height: 200,
-                margin: EdgeInsets.only(left: 5, right: 5),
+                margin: const EdgeInsets.only(left: 5, right: 5),
                 decoration: BoxDecoration(
-                    color: Color.fromARGB(250, 207, 247, 123),
+                    color: const Color.fromARGB(250, 207, 247, 123),
                     borderRadius: BorderRadius.circular(20)),
               ),
               Container(
-                padding: EdgeInsets.only(left: 10, top: 20),
+                padding: const EdgeInsets.only(left: 10, top: 20),
                 height: 60,
                 width: 400,
                 color: Colors.black,
-                child: Text(
+                child: const Text(
                   "Your Cources",
                   style: TextStyle(
                       color: Colors.white,
@@ -83,13 +82,8 @@ class _HomeState extends State<Home> {
                           child: Container(
                             height: 90,
                             width: 200,
-                            padding: EdgeInsets.only(top: 20),
-                            child: Text(
-                              "algebra ",
-                              style:
-                                  TextStyle(fontSize: 20, color: Colors.white),
-                            ),
-                            decoration: BoxDecoration(
+                            padding: const EdgeInsets.only(top: 20),
+                            decoration: const BoxDecoration(
                                 color: Colors.black,
                                 border: Border(
                                     bottom: BorderSide(
@@ -105,6 +99,11 @@ class _HomeState extends State<Home> {
                                     Color.fromARGB(36, 25, 24, 24),
                                   ],
                                 )),
+                            child: const Text(
+                              "algebra ",
+                              style:
+                                  TextStyle(fontSize: 20, color: Colors.white),
+                            ),
                           ),
                         ),
                       ),
@@ -112,7 +111,7 @@ class _HomeState extends State<Home> {
                   ),
                 ),
               ),
-              Container(
+              const SizedBox(
                 height: 60,
                 child: Text(
                   "Math",
@@ -124,14 +123,14 @@ class _HomeState extends State<Home> {
               ),
               Row(
                 children: [
-                  Padding(padding: EdgeInsets.only(left: 5, right: 5)),
+                  const Padding(padding: EdgeInsets.only(left: 5, right: 5)),
                   Container(
-                    color: Color.fromARGB(176, 54, 53, 53),
+                    color: const Color.fromARGB(176, 54, 53, 53),
                     height: 60,
                     child: Image.asset("lib/assets/math.png"),
                   ),
                   Container(
-                    color: Color.fromARGB(176, 54, 53, 53),
+                    color: const Color.fromARGB(176, 54, 53, 53),
                     height: 60,
                     width: 250,
                     child: const Text("ALGEBRA",
@@ -144,8 +143,8 @@ class _HomeState extends State<Home> {
                   Container(
                     height: 60,
                     width: 60,
-                    color: Color.fromARGB(176, 54, 53, 53),
-                    child: Icon(
+                    color: const Color.fromARGB(176, 54, 53, 53),
+                    child: const Icon(
                       Icons.play_arrow,
                       size: 40,
                       color: Colors.white,
@@ -156,8 +155,6 @@ class _HomeState extends State<Home> {
             ],
           ),
         ),
-
-        //@Arman - end
         //
         //
         //Auth *Do Not Touch*
@@ -179,59 +176,64 @@ class _HomeState extends State<Home> {
         //   ),
         // ),
         //
-        bottomNavigationBar: Consumer(
-          builder: (context, ref, child) {
-            return GNav(
-              tabs: const [
-                GButton(icon: Icons.home, text: "Home"),
-                GButton(icon: Icons.edit, text: "Test"),
-                GButton(icon: Icons.person_2, text: "Profile"),
-                GButton(icon: Icons.settings, text: "Setting"),
-              ],
-              selectedIndex: ref.read(bottomBarindexProvider),
-              //Routing Based on the index
-              onTabChange: (index) {
-                // print(index);
-                if (index == 0) {
-                  //Home()
-                  ref
-                      .read(bottomBarindexProvider.notifier)
-                      .update((state) => index);
-                  GoRouter.of(context)
-                      .pushNamed(AppNavRouteConstants.homeRouteName);
-                } else if (index == 1) {
-                  //Testing()
-                  ref
-                      .read(bottomBarindexProvider.notifier)
-                      .update((state) => index);
-                  GoRouter.of(context)
-                      .pushNamed(AppNavRouteConstants.testingRouteName);
-                } else if (index == 2) {
-                  //Profile()
-                  ref
-                      .read(bottomBarindexProvider.notifier)
-                      .update((state) => index);
-                  GoRouter.of(context)
-                      .pushNamed(AppNavRouteConstants.profileRouteName);
-                } else if (index == 3) {
-                  //Settings()
-                  ref
-                      .read(bottomBarindexProvider.notifier)
-                      .update((state) => index);
-                  GoRouter.of(context)
-                      .pushNamed(AppNavRouteConstants.settingsRouteName);
-                } else {
-                  //Home()
-                  ref
-                      .read(bottomBarindexProvider.notifier)
-                      .update((state) => index);
-                  GoRouter.of(context)
-                      .pushNamed(AppNavRouteConstants.homeRouteName);
-                }
-              },
-            );
-          },
-        ),
+        // bottomNavigationBar: Consumer(
+        //   builder: (context, ref, child) {
+        //     return GNav(
+        //       haptic: true,
+        //       backgroundColor: Colors.black,
+        //       color: Colors.white,
+        //       activeColor: Colors.white,
+        //       padding: EdgeInsets.all(20),
+        //       tabs: const [
+        //         GButton(icon: Icons.home, text: "Home"),
+        //         GButton(icon: Icons.edit, text: "Test"),
+        //         GButton(icon: Icons.person_2, text: "Profile"),
+        //         GButton(icon: Icons.settings, text: "Setting"),
+        //       ],
+        //       selectedIndex: ref.read(bottomBarindexProvider),
+        //       //Routing Based on the index
+        //       onTabChange: (index) {
+        //         // print(index);
+        //         if (index == 0) {
+        //           //Home()
+        //           ref
+        //               .read(bottomBarindexProvider.notifier)
+        //               .update((state) => index);
+        //           GoRouter.of(context)
+        //               .pushNamed(AppNavRouteConstants.homeRouteName);
+        //         } else if (index == 1) {
+        //           //Testing()
+        //           ref
+        //               .read(bottomBarindexProvider.notifier)
+        //               .update((state) => index);
+        //           GoRouter.of(context)
+        //               .pushNamed(AppNavRouteConstants.testingRouteName);
+        //         } else if (index == 2) {
+        //           //Profile()
+        //           ref
+        //               .read(bottomBarindexProvider.notifier)
+        //               .update((state) => index);
+        //           GoRouter.of(context)
+        //               .pushNamed(AppNavRouteConstants.profileRouteName);
+        //         } else if (index == 3) {
+        //           //Settings()
+        //           ref
+        //               .read(bottomBarindexProvider.notifier)
+        //               .update((state) => index);
+        //           GoRouter.of(context)
+        //               .pushNamed(AppNavRouteConstants.settingsRouteName);
+        //         } else {
+        //           //Home()
+        //           ref
+        //               .read(bottomBarindexProvider.notifier)
+        //               .update((state) => index);
+        //           GoRouter.of(context)
+        //               .pushNamed(AppNavRouteConstants.homeRouteName);
+        //         }
+        //       },
+        //     );
+        //   },
+        // ),
       ),
     );
   }

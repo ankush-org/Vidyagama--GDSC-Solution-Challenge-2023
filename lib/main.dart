@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gsc/Pages/Auth/P0_startup.dart';
 import 'package:gsc/Pages/Home/P3A_home.dart';
 import 'package:gsc/TMP/Home/h01.dart';
+import '../Pages./BaseScaffold.dart';
 import '../Backend/Routes/app_route_config.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -24,29 +25,29 @@ class BaseMaterialApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return
-        // MaterialApp(
-        //   navigatorKey: navigatorKey,
-        //   debugShowCheckedModeBanner: false,
-        //   home: StreamBuilder<User?>(
-        //     stream: FirebaseAuth.instance.authStateChanges(),
-        //     builder: (context, snapshot) {
-        //       if (snapshot.hasData) {
-        //         return const Home();
-        //       } else if (snapshot.connectionState == ConnectionState.waiting) {
-        //         return const Center(child: CircularProgressIndicator());
-        //       } else if (snapshot.hasError) {
-        //         return const Center(child: Text(("errer")));
-        //       } else {
-        //         return const InitPage();
-        //       }
-        //     },
-        //   ),
-        // );
-        MaterialApp.router(
+    return MaterialApp(
+      navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
-      routeInformationParser: AppNavRouter().grouter.routeInformationParser,
-      routerDelegate: AppNavRouter().grouter.routerDelegate,
+      home: StreamBuilder<User?>(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return const HomeScaffold();
+          } else if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return const Center(child: Text(("Error")));
+          } else {
+            return const InitPage();
+          }
+        },
+      ),
     );
+    //Alternate Routing
+    //     MaterialApp.router(
+    //   debugShowCheckedModeBanner: false,
+    //   routeInformationParser: AppNavRouter().grouter.routeInformationParser,
+    //   routerDelegate: AppNavRouter().grouter.routerDelegate,
+    // );
   }
 }
