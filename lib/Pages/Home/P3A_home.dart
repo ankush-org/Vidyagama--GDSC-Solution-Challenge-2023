@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:gsc/Pages/Home/topic_selection_card.dart';
+// import 'package:gsc/TMP/Home/topic_card.dart';
 
 import '../../Backend/Data/state_management.dart';
 import '../../Backend/Routes/app_route_constants.dart';
@@ -15,6 +17,12 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final List topicList = [
+    ['topic1', 'math.jpg', Colors.red],
+    ['topic2', 'eng.png', Colors.green],
+    ['topic3', 'people.png', Colors.yellow],
+    ['topic4', 'languages.png', Colors.blue],
+  ];
   final homeUser = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
@@ -23,32 +31,38 @@ class _HomeState extends State<Home> {
       child: Scaffold(
         //UI
         appBar: AppBar(
-            backgroundColor: Colors.black,
-            toolbarHeight: 60,
-            title: const Text(
+          backgroundColor: Colors.black,
+          toolbarHeight: 70,
+          title: const Padding(
+            padding: EdgeInsets.only(top: 30),
+            child: Text(
               "Namaste",
               style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
-            )),
+            ),
+          ),
+        ),
         body: Container(
           color: Colors.black,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                  height: 50,
-                  width: 400,
-                  padding: const EdgeInsets.only(top: 10),
-                  color: Colors.black,
-                  child: const Text(
-                    "Your Battle Arena",
-                    style: TextStyle(
-                        fontSize: 25,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold),
-                  )),
+                height: 50,
+                width: 400,
+                padding: const EdgeInsets.only(left: 10, right: 10),
+                color: Colors.black,
+                child: const Text(
+                  "Your Battle Arena",
+                  style: TextStyle(
+                    fontSize: 25,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
               Container(
                 height: 200,
-                margin: const EdgeInsets.only(left: 5, right: 5),
+                margin: const EdgeInsets.only(left: 8, right: 8),
                 decoration: BoxDecoration(
                     color: const Color.fromARGB(250, 207, 247, 123),
                     borderRadius: BorderRadius.circular(20)),
@@ -59,90 +73,66 @@ class _HomeState extends State<Home> {
                 width: 400,
                 color: Colors.black,
                 child: const Text(
-                  "Your Cources",
+                  "Your Courses",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 25,
                       fontWeight: FontWeight.bold),
-                ),
-              ),
-              Center(
-                child: SafeArea(
-                  child: Stack(
-                    children: [
-                      Container(
-                        alignment: Alignment.bottomLeft,
-                        height: 190,
-                        width: 190,
-                        child: Image.asset("lib/assets/math.jpg"),
-                      ),
-                      Positioned.fill(
-                        child: Align(
-                          alignment: Alignment.bottomLeft,
-                          child: Container(
-                            height: 90,
-                            width: 200,
-                            padding: const EdgeInsets.only(top: 20),
-                            decoration: const BoxDecoration(
-                                color: Colors.black,
-                                border: Border(
-                                    bottom: BorderSide(
-                                        color: Color.fromARGB(255, 70, 147, 72),
-                                        width: 3)),
-                                gradient: LinearGradient(
-                                  begin: Alignment.bottomCenter,
-                                  end: Alignment.topCenter,
-                                  colors: [
-                                    Colors.black,
-                                    Color.fromARGB(242, 0, 0, 0),
-                                    Color.fromARGB(221, 25, 24, 24),
-                                    Color.fromARGB(36, 25, 24, 24),
-                                  ],
-                                )),
-                            child: const Text(
-                              "algebra ",
-                              style:
-                                  TextStyle(fontSize: 20, color: Colors.white),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
                 ),
               ),
               const SizedBox(
-                height: 60,
-                child: Text(
-                  "Math",
-                  style: TextStyle(
-                      fontSize: 25,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold),
+                height: 20,
+              ),
+              //Listview of Topics
+              SizedBox(
+                height: 200,
+                child: ListView.builder(
+                  itemCount: topicList.length,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    return TopicCard(
+                      topicName: topicList[index][0],
+                      imgName: topicList[index][1],
+                      barColor: topicList[index][2],
+                    );
+                  },
                 ),
+              ),
+              //Resume-Button
+              const SizedBox(
+                height: 25,
               ),
               Row(
                 children: [
-                  const Padding(padding: EdgeInsets.only(left: 5, right: 5)),
+                  const Padding(
+                      padding: EdgeInsets.only(left: 5, right: 5, top: 10)),
                   Container(
                     color: const Color.fromARGB(176, 54, 53, 53),
-                    height: 60,
-                    child: Image.asset("lib/assets/math.png"),
+                    height: 70,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Image.asset("lib/assets/math.png"),
+                    ),
                   ),
                   Container(
                     color: const Color.fromARGB(176, 54, 53, 53),
-                    height: 60,
+                    height: 70,
                     width: 250,
-                    child: const Text("ALGEBRA",
+                    child: const Padding(
+                      padding: EdgeInsets.only(top: 24),
+                      child: Text(
+                        "Cross Multiplication",
                         style: TextStyle(
                             letterSpacing: 1,
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
-                            color: Colors.white)),
+                            color: Colors.white),
+                      ),
+                    ),
                   ),
                   Container(
-                    height: 60,
-                    width: 60,
+                    height: 70,
+                    width: 70,
                     color: const Color.fromARGB(176, 54, 53, 53),
                     child: const Icon(
                       Icons.play_arrow,

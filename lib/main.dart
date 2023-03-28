@@ -26,6 +26,7 @@ class BaseMaterialApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      darkTheme: ThemeData.dark(),
       navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
       home: StreamBuilder<User?>(

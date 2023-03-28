@@ -26,15 +26,19 @@ class HomeScaffold extends StatefulWidget {
 }
 
 class _HomeScaffoldState extends State<HomeScaffold> {
+  //Navigation
+
   //List Of Routes
   int _selectedIndex = 0;
-  //Navigation Widgest Array
+  //Navigation Widget Array
   static const List<Widget> _widgetOptions = <Widget>[
     Home(),
     Testing(),
     Community(),
-    UserProfile()
+    UserProfile(),
   ];
+
+  //Scaffold
   @override
   Widget build(BuildContext context) {
     return Scaffold(

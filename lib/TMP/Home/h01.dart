@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:gsc/TMP/Home/topic_card.dart';
+// import 'package:gsc/TMP/Home/topic_card.dart';
 
 import '../../Backend/Data/state_management.dart';
 import '../../Backend/Routes/app_route_constants.dart';
+import '../../Pages/Home/topic_selection_card.dart';
 
 class h01 extends StatefulWidget {
   const h01({super.key});
@@ -49,9 +50,10 @@ class _h01State extends State<h01> {
                     scrollDirection: Axis.horizontal,
                     itemCount: 3,
                     itemBuilder: (context, index) {
-                      return const TopicCard(
-                        topicName: 'topicName',
-                        thumbnailPath: '',
+                      return TopicCard(
+                        imgName: 'math.jpg',
+                        topicName: '',
+                        barColor: Colors.black,
                       );
                     }),
               ),
