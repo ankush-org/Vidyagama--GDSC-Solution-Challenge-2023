@@ -18,10 +18,10 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final List topicList = [
-    ['topic1', 'math.jpg', Colors.red],
-    ['topic2', 'eng.png', Colors.green],
-    ['topic3', 'people.png', Colors.yellow],
-    ['topic4', 'languages.png', Colors.blue],
+    ['Elementary Mathematics', 'math.jpg', Colors.red],
+    ['Environmental Science', 'env.jpg', Colors.green],
+    ['Commutative  English', 'eng.jpg', Colors.yellow],
+    ['Law & Ethics', 'law.jpg', Colors.blue],
   ];
   final homeUser = FirebaseAuth.instance.currentUser;
   @override
@@ -111,7 +111,7 @@ class _HomeState extends State<Home> {
                     height: 70,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Image.asset("lib/assets/math.png"),
+                      child: Image.asset("lib/assets/math.jpg"),
                     ),
                   ),
                   Container(
