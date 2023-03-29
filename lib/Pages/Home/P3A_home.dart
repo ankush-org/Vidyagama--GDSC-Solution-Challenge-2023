@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:gsc/Pages/Home/topic_selection_card.dart';
 // import 'package:gsc/TMP/Home/topic_card.dart';
@@ -32,14 +34,31 @@ class _HomeState extends State<Home> {
         //UI
         appBar: AppBar(
           backgroundColor: Colors.black,
-          toolbarHeight: 70,
-          title: const Padding(
-            padding: EdgeInsets.only(top: 30),
+          toolbarHeight: 107,
+          title: Padding(
+            padding: const EdgeInsets.only(top: 30),
             child: Text(
-              "Namaste",
-              style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+              "Namaste !",
+              style: GoogleFonts.ubuntu(
+                  fontSize: 40,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white),
+              //  TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
             ),
           ),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(top: 35.0, right: 15),
+              child: IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  FontAwesomeIcons.bell,
+                  color: Colors.white,
+                  size: 25,
+                ),
+              ),
+            )
+          ],
         ),
         body: Container(
           color: Colors.black,

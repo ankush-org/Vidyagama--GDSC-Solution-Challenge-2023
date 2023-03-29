@@ -28,10 +28,11 @@ class BaseMaterialApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        theme: ThemeData(primarySwatch: Colors.grey),
         darkTheme: ThemeData.dark(),
         navigatorKey: navigatorKey,
         debugShowCheckedModeBanner: false,
-        home: HomeScaffold()
+        home: InitPage()
         // StreamBuilder<User?>(
         //   stream: FirebaseAuth.instance.authStateChanges(),
         //   builder: (context, snapshot) {

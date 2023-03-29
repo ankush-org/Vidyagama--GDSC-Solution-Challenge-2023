@@ -50,9 +50,12 @@ class TopicCard extends StatelessWidget {
                     ],
                   ),
                 ),
-                child: Text(
-                  topicName,
-                  style: const TextStyle(fontSize: 20, color: Colors.white),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: Text(
+                    topicName,
+                    style: const TextStyle(fontSize: 20, color: Colors.white),
+                  ),
                 ),
               ),
             ),
