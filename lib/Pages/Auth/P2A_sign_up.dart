@@ -24,7 +24,7 @@ class _SignUpState extends State<SignUp> {
                 builder: (BuildContext context) => const InitPage(),
               ));
             },
-            icon: Icon(Icons.arrow_back)),
+            icon: const Icon(Icons.arrow_back)),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
