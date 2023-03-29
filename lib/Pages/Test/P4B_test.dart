@@ -1,8 +1,11 @@
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:gsc/Pages/BaseScaffold.dart';
+import 'package:gsc/Pages/Test/P4A_testing.dart';
 
-import '../../Backend/Data/state_management.dart';
+// import '../../Backend/Data/state_management.dart';
 
 class TestPage extends StatefulWidget {
   const TestPage({super.key});
@@ -14,10 +17,29 @@ class TestPage extends StatefulWidget {
 class _TestPageState extends State<TestPage> {
   //Variables
   String? mcq;
+  String? answer;
+  String? response;
+
+  final _textControllerAns = TextEditingController();
 
   //Chat GPT
   late OpenAI? chatGPT;
 
+  Future generateQsn() async {
+    //Prompting for Quesn Generation
+    print('pressed'); //Debug
+    final request = CompleteText(
+        prompt: 'Ask a subjective question on matter',
+        model: kTranslateModelV3);
+    final response = await chatGPT!.onCompleteText(request: request);
+    print(response!.choices[0].text); //Debug
+    setState(
+      () {
+        mcq = response.choices[0].text;
+      },
+    );
+  }
+  
   //init
   @override
   void initState() {
@@ -26,7 +48,7 @@ class _TestPageState extends State<TestPage> {
         baseOption: HttpSetup(receiveTimeout: 60000));
     super.initState();
   }
-
+  
   //dispose
   @override
   void dispose() {
@@ -38,31 +60,116 @@ class _TestPageState extends State<TestPage> {
   //Scaffold
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xFF201c1c),
-      body: Consumer(
-        builder: (context, ref, child) {
-          mcq = ref.watch(mcqQuestion);
-          return SafeArea(child: Center(child: Text('$mcq')));
-        },
-      ),
-      floatingActionButton: Consumer(
-        builder: (context, ref, child) {
-          return FloatingActionButton(onPressed: () async {
-            //Prompting for Quesn Generation
-            print('pressed'); //Debug
-            final request = CompleteText(
-                prompt: 'Make another mcq question on algebra with solution',
-                model: kTranslateModelV3);
-            final response = await chatGPT!.onCompleteText(request: request);
-            print(response!.choices[0].text); //Debug
-            // // Checking State
-            ref
-                .read(mcqQuestion.notifier)
-                .update((state) => response.choices[0].text.toString());
-            // //
-          });
-        },
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        backgroundColor: Colors.black,
+        appBar: AppBar(
+          backgroundColor: Colors.black,
+          leading: IconButton(
+            onPressed: () {
+              Navigator.of(context).pushReplacement(MaterialPageRoute(
+                builder: (BuildContext context) => const HomeScaffold(),
+              ));
+            },
+            icon: const Icon(
+              Icons.arrow_back_ios_new_rounded,
+              color: Colors.white,
+            ),
+          ),
+        ),
+        body: Consumer(
+          builder: (context, ref, child) {
+            // mcq = ref.watch(mcqQuestion);
+            return SafeArea(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Center(
+                      child: Container(
+                        height: 200,
+                        width: 300,
+                        color: Colors.white,
+                        child: Text(
+                          '$mcq',
+                          style: GoogleFonts.aBeeZee(color: Colors.black),
+                        ),
+                      ),
+                    ),
+                    Center(
+                      child: Container(
+                        height: 200,
+                        width: 300,
+                        color: Colors.white,
+                        child: Text(
+                          '$response',
+                          style: GoogleFonts.aBeeZee(color: Colors.black),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(14.0),
+                      child: TextField(
+                        style: const TextStyle(color: Colors.white),
+                        controller: _textControllerAns,
+                        onSubmitted: (val) {
+                          setState(
+                            () {
+                              answer = val;
+                            },
+                          );
+                        },
+                        decoration: const InputDecoration(
+                          prefixIconColor: Colors.orangeAccent,
+                          suffixIconColor: Colors.orangeAccent,
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Colors.orangeAccent, width: 2.0),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.orangeAccent),
+                          ),
+                          border: OutlineInputBorder(),
+                          hintText: 'Enter Your Answer',
+                          prefixIcon: Icon(Icons.data_array),
+                          // suffixIcon: Icon(Icons.login_sharp),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        ),
+        floatingActionButton: Consumer(
+          builder: (context, ref, child) {
+            return FloatingActionButton(onPressed: () async {
+              generateQsn();
+            }
+                // () async {
+                //   //Prompting for Quesn Generation
+                //   print('pressed'); //Debug
+                //   final request = CompleteText(
+                //       prompt: 'Ask a subjective question on addition',
+                //       model: kTranslateModelV3);
+                //   final response =
+                //       await chatGPT!.onCompleteText(request: request);
+                //   print(response!.choices[0].text); //Debug
+                //   setState(
+                //     () {
+                //       mcq = response.choices[0].text;
+                //     },
+                //   );
+                //   // // Checking State
+                //   // ref
+                //   //     .read(mcqQuestion.notifier)
+                //   //     .update((state) => response.choices[0].text.toString());
+                //   // //
+                // },
+                );
+          },
+        ),
       ),
     );
   }

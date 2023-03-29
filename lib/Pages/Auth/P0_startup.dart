@@ -38,8 +38,8 @@ class _P0State extends ConsumerState<InitPage> {
     //sign-in logic
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: ref.read(userEmail).toString(),
-        password: ref.read(userPassword).toString(),
+        email: ref.read(userEmail).toString().trim(),
+        password: ref.read(userPassword).toString().trim(),
       );
     } on FirebaseAuthException catch (e) {
       print(e);

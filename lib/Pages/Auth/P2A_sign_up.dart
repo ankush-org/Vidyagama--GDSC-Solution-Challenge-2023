@@ -207,14 +207,19 @@ class _SignUpState extends ConsumerState<SignUp> {
                       if (passWordver == ref.read(userPassword) &&
                           ref.read(userEmail) != 'null' &&
                           ref.read(userName) != 'null') {
-                        print(_textControllerEmail.toString());
-                        print(_textControllerName.toString());
-                        print(_textControllerPassword.toString());
-                        print(_textControllerPasswordVer.toString());
-                        print(ref.read(userEmail));
-                        print(ref.read(userName));
-                        print(ref.read(userPassword));
+                        // print(_textControllerEmail.toString());
+                        // print(_textControllerName.toString());
+                        // print(_textControllerPassword.toString());
+                        // print(_textControllerPasswordVer.toString());
+                        // print(ref.read(userEmail));
+                        // print(ref.read(userName));
+                        // print(ref.read(userPassword));
                         signUp();
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (BuildContext context) => const InitPage(),
+                          ),
+                        );
                       }
                     },
                     child: const Text(

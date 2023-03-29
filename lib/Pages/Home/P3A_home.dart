@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:gsc/Pages/Home/battles_card.dart';
 import 'package:gsc/Pages/Home/topic_selection_card.dart';
 // import 'package:gsc/TMP/Home/topic_card.dart';
 
@@ -20,10 +21,15 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final List topicList = [
-    ['Elementary Mathematics', 'math.jpg', Colors.red],
-    ['Environmental Science', 'env.jpg', Colors.green],
-    ['Commutative  English', 'eng.jpg', Colors.yellow],
-    ['Law & Ethics', 'law.jpg', Colors.blue],
+    ['Elementary Mathematics', 'math.jpg', Colors.red, 1],
+    ['Environmental Science', 'env.jpg', Colors.green, 1],
+    ['Commutative  English', 'eng.jpg', Colors.yellow, 1],
+    ['Law & Ethics', 'law.jpg', Colors.blue, 1],
+  ];
+  final List battleList = [
+    ['pfp1.png', 'pfp2.png', 'Elementary Mathematics'],
+    ['pfp1.png', 'pfp2.png', 'Elementary Mathematics'],
+    ['pfp1.png', 'pfp2.png', 'Elementary Mathematics'],
   ];
   final homeUser = FirebaseAuth.instance.currentUser;
   @override
@@ -79,12 +85,19 @@ class _HomeState extends State<Home> {
                   ),
                 ),
               ),
-              Container(
+              SizedBox(
                 height: 200,
-                margin: const EdgeInsets.only(left: 8, right: 8),
-                decoration: BoxDecoration(
-                    color: const Color.fromARGB(250, 207, 247, 123),
-                    borderRadius: BorderRadius.circular(20)),
+                child: ListView.builder(
+                  itemCount: battleList.length,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    return BattleCard(
+                      pfp1: battleList[index][0],
+                      pfp2: battleList[index][1],
+                      topicName: battleList[index][2],
+                    );
+                  },
+                ),
               ),
               Container(
                 padding: const EdgeInsets.only(left: 10, top: 20),
@@ -113,6 +126,7 @@ class _HomeState extends State<Home> {
                       topicName: topicList[index][0],
                       imgName: topicList[index][1],
                       barColor: topicList[index][2],
+                      navId: topicList[index][3],
                     );
                   },
                 ),

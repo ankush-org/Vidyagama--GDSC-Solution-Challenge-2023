@@ -54,6 +54,7 @@ class _h01State extends State<h01> {
                         imgName: 'math.jpg',
                         topicName: '',
                         barColor: Colors.black,
+                        navId: 1,
                       );
                     }),
               ),
