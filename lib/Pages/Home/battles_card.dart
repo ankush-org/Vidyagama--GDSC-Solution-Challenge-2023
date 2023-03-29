@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:gsc/Pages/Test/P4D_Battles.dart';
 
 class BattleCard extends StatelessWidget {
   final String pfp1;
@@ -15,9 +16,9 @@ class BattleCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // Navigator.of(context).pushReplacement(MaterialPageRoute(
-        //   builder: (BuildContext context) => const VideoPlayerHome(),
-        // ));
+        Navigator.of(context).pushReplacement(MaterialPageRoute(
+          builder: (BuildContext context) => const Battles(),
+        ));
       },
       child: Stack(
         children: [

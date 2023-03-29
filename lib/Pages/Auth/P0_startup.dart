@@ -18,6 +18,8 @@ class InitPage extends ConsumerStatefulWidget {
 }
 
 class _P0State extends ConsumerState<InitPage> {
+  //google sing in
+
   //Variables
   final _textControllerEmail = TextEditingController();
   final _textControllerPassword = TextEditingController();
@@ -38,8 +40,8 @@ class _P0State extends ConsumerState<InitPage> {
     //sign-in logic
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: ref.read(userEmail).toString().trim(),
-        password: ref.read(userPassword).toString().trim(),
+        email: ref.read(userEmail).toString(),
+        password: ref.read(userPassword).toString(),
       );
     } on FirebaseAuthException catch (e) {
       print(e);

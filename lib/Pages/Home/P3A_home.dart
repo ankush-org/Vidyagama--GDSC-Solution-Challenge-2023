@@ -27,9 +27,9 @@ class _HomeState extends State<Home> {
     ['Law & Ethics', 'law.jpg', Colors.blue, 1],
   ];
   final List battleList = [
+    ['pfp1.png', 'pfp2.png', 'Environmental Science'],
     ['pfp1.png', 'pfp2.png', 'Elementary Mathematics'],
-    ['pfp1.png', 'pfp2.png', 'Elementary Mathematics'],
-    ['pfp1.png', 'pfp2.png', 'Elementary Mathematics'],
+    ['pfp1.png', 'pfp2.png', 'Law & Ethics'],
   ];
   final homeUser = FirebaseAuth.instance.currentUser;
   @override
@@ -178,26 +178,6 @@ class _HomeState extends State<Home> {
             ],
           ),
         ),
-        //
-        //
-        //Auth *Do Not Touch*
-        //     Center(
-        //   child: Column(
-        //     mainAxisAlignment: MainAxisAlignment.center,
-        //     children: [
-        //       Text(homeUser!.email.toString()),
-        //       Padding(
-        //         padding: const EdgeInsets.all(2.0),
-        //         child: ElevatedButton.icon(
-        //             onPressed: () {
-        //               FirebaseAuth.instance.signOut();
-        //             },
-        //             icon: const Icon(Icons.email),
-        //             label: const Text('Sign-Out')),
-        //       )
-        //     ],
-        //   ),
-        // ),
         //
         // bottomNavigationBar: Consumer(
         //   builder: (context, ref, child) {

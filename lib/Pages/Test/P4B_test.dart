@@ -18,19 +18,21 @@ class _TestPageState extends State<TestPage> {
   //Variables
   String? mcq;
   String? answer;
-  String? response;
+  String? promptResponse = '';
 
   final _textControllerAns = TextEditingController();
 
   //Chat GPT
   late OpenAI? chatGPT;
 
+  //Generating Question
   Future generateQsn() async {
     //Prompting for Quesn Generation
-    print('pressed'); //Debug
+    print('Question prompted'); //Debug
     final request = CompleteText(
-        prompt: 'Ask a subjective question on matter',
-        model: kTranslateModelV3);
+      prompt: 'Ask another question in C language',
+      model: kTranslateModelV3,
+    );
     final response = await chatGPT!.onCompleteText(request: request);
     print(response!.choices[0].text); //Debug
     setState(
@@ -39,7 +41,24 @@ class _TestPageState extends State<TestPage> {
       },
     );
   }
-  
+
+  //Generating a Response
+  Future generateAns() async {
+    //prompting for an answer review
+    final request2 = CompleteText(
+      prompt:
+          'analyze and tell if answer - $answer is correct answer to question - $mcq, and also explain why I am wrong and give me a score out of 100',
+      model: kTranslateModelV3,
+    );
+    final response = await chatGPT!.onCompleteText(request: request2);
+    print(response!.choices[0].text); //Debug
+    setState(
+      () {
+        promptResponse = response.choices[0].text;
+      },
+    );
+  }
+
   //init
   @override
   void initState() {
@@ -48,7 +67,7 @@ class _TestPageState extends State<TestPage> {
         baseOption: HttpSetup(receiveTimeout: 60000));
     super.initState();
   }
-  
+
   //dispose
   @override
   void dispose() {
@@ -87,23 +106,30 @@ class _TestPageState extends State<TestPage> {
                   children: [
                     Center(
                       child: Container(
-                        height: 200,
-                        width: 300,
+                        height: 600,
+                        width: 360,
                         color: Colors.white,
-                        child: Text(
-                          '$mcq',
-                          style: GoogleFonts.aBeeZee(color: Colors.black),
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Container(
-                        height: 200,
-                        width: 300,
-                        color: Colors.white,
-                        child: Text(
-                          '$response',
-                          style: GoogleFonts.aBeeZee(color: Colors.black),
+                        child: Column(
+                          children: [
+                            Center(
+                              child: Text(
+                                '$mcq',
+                                style: GoogleFonts.aBeeZee(color: Colors.black),
+                              ),
+                            ),
+                            Center(
+                              child: Container(
+                                height: 200,
+                                width: 300,
+                                color: Colors.white,
+                                child: Text(
+                                  '$promptResponse',
+                                  style:
+                                      GoogleFonts.aBeeZee(color: Colors.black),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
@@ -116,6 +142,7 @@ class _TestPageState extends State<TestPage> {
                           setState(
                             () {
                               answer = val;
+                              generateAns();
                             },
                           );
                         },
@@ -132,7 +159,6 @@ class _TestPageState extends State<TestPage> {
                           border: OutlineInputBorder(),
                           hintText: 'Enter Your Answer',
                           prefixIcon: Icon(Icons.data_array),
-                          // suffixIcon: Icon(Icons.login_sharp),
                         ),
                       ),
                     ),
@@ -146,28 +172,7 @@ class _TestPageState extends State<TestPage> {
           builder: (context, ref, child) {
             return FloatingActionButton(onPressed: () async {
               generateQsn();
-            }
-                // () async {
-                //   //Prompting for Quesn Generation
-                //   print('pressed'); //Debug
-                //   final request = CompleteText(
-                //       prompt: 'Ask a subjective question on addition',
-                //       model: kTranslateModelV3);
-                //   final response =
-                //       await chatGPT!.onCompleteText(request: request);
-                //   print(response!.choices[0].text); //Debug
-                //   setState(
-                //     () {
-                //       mcq = response.choices[0].text;
-                //     },
-                //   );
-                //   // // Checking State
-                //   // ref
-                //   //     .read(mcqQuestion.notifier)
-                //   //     .update((state) => response.choices[0].text.toString());
-                //   // //
-                // },
-                );
+            });
           },
         ),
       ),
