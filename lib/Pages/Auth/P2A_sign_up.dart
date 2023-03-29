@@ -1,17 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gsc/Pages/Auth/P0_startup.dart';
 import 'package:lottie/lottie.dart';
 import 'package:sign_in_button/sign_in_button.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class SignUp extends StatefulWidget {
+import '../../Backend/Data/state_management.dart';
+
+class SignUp extends ConsumerStatefulWidget {
   const SignUp({super.key});
 
   @override
-  State<SignUp> createState() => _SignUpState();
+  ConsumerState<SignUp> createState() => _SignUpState();
 }
 
-class _SignUpState extends State<SignUp> {
+class _SignUpState extends ConsumerState<SignUp> {
+  //Variables
+  final _textControllerEmail = TextEditingController();
+  final _textControllerName = TextEditingController();
+  final _textControllerPassword = TextEditingController();
+  final _textControllerPasswordVer = TextEditingController();
+  String? passWordver;
+  //Auth
+  final user = FirebaseAuth.instance.currentUser;
+
+  Future signUp() async {
+    //sign-up logic
+    print('signup called');
+    try {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: _textControllerEmail.text.trim(),
+        password: _textControllerPassword.text.trim(),
+      );
+    } on FirebaseAuthException catch (e) {
+      print(e);
+    }
+  }
+
+  //Scaffold
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,54 +68,69 @@ class _SignUpState extends State<SignUp> {
                 'https://assets4.lottiefiles.com/packages/lf20_Cm5ERobRJM.json',
                 width: 250,
               ),
-              //Name
+              //Email
               Padding(
                 padding: const EdgeInsets.all(14.0),
                 child: TextField(
-                  // controller: _textControllerEmail,
-                  decoration: InputDecoration(
+                  controller: _textControllerEmail,
+                  onSubmitted: (val) {
+                    setState(
+                      () {
+                        if (_textControllerEmail.text != '') {
+                          ref.read(userEmail.notifier).update(
+                                (state) => _textControllerEmail.text,
+                              );
+                        }
+                      },
+                    );
+                  },
+                  decoration: const InputDecoration(
                     prefixIconColor: Colors.orangeAccent,
                     suffixIconColor: Colors.orangeAccent,
-                    focusedBorder: const OutlineInputBorder(
+                    focusedBorder: OutlineInputBorder(
                       borderSide:
                           BorderSide(color: Colors.orangeAccent, width: 2.0),
                     ),
-                    enabledBorder: const OutlineInputBorder(
+                    enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.orangeAccent),
                     ),
-                    border: const OutlineInputBorder(),
+                    border: OutlineInputBorder(),
                     hintText: 'Enter Your Email',
-                    prefixIcon: const Icon(Icons.alternate_email_outlined),
-                    suffixIcon: IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.login_sharp),
-                    ),
+                    prefixIcon: Icon(Icons.alternate_email_outlined),
+                    // suffixIcon: Icon(Icons.login_sharp),
                   ),
                 ),
               ),
-
               //Name
               Padding(
                 padding: const EdgeInsets.all(14.0),
                 child: TextField(
-                  // controller: _textControllerEmail,
-                  decoration: InputDecoration(
+                  controller: _textControllerName,
+                  onSubmitted: (val) {
+                    setState(
+                      () {
+                        if (_textControllerName.text != '') {
+                          ref.read(userName.notifier).update(
+                                (state) => _textControllerName.text,
+                              );
+                        }
+                      },
+                    );
+                  },
+                  decoration: const InputDecoration(
                     prefixIconColor: Colors.orangeAccent,
                     suffixIconColor: Colors.orangeAccent,
-                    focusedBorder: const OutlineInputBorder(
+                    focusedBorder: OutlineInputBorder(
                       borderSide:
                           BorderSide(color: Colors.orangeAccent, width: 2.0),
                     ),
-                    enabledBorder: const OutlineInputBorder(
+                    enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.orangeAccent),
                     ),
-                    border: const OutlineInputBorder(),
+                    border: OutlineInputBorder(),
                     hintText: 'Enter Your Name',
-                    prefixIcon: const Icon(Icons.person),
-                    suffixIcon: IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.login_sharp),
-                    ),
+                    prefixIcon: Icon(Icons.person),
+                    // suffixIcon: Icon(Icons.login_sharp),
                   ),
                 ),
               ),
@@ -96,50 +138,57 @@ class _SignUpState extends State<SignUp> {
               Padding(
                 padding: const EdgeInsets.all(14.0),
                 child: TextField(
-                  obscureText: true,
-                  // controller: _textControllerEmail,
-                  decoration: InputDecoration(
+                  controller: _textControllerPassword,
+                  onSubmitted: (val) {
+                    setState(
+                      () {
+                        if (_textControllerPassword.text != '') {
+                          ref.read(userPassword.notifier).update(
+                                (state) => _textControllerPassword.text,
+                              );
+                        }
+                      },
+                    );
+                  },
+                  decoration: const InputDecoration(
                     prefixIconColor: Colors.orangeAccent,
                     suffixIconColor: Colors.orangeAccent,
-                    focusedBorder: const OutlineInputBorder(
+                    focusedBorder: OutlineInputBorder(
                       borderSide:
                           BorderSide(color: Colors.orangeAccent, width: 2.0),
                     ),
-                    enabledBorder: const OutlineInputBorder(
+                    enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.orangeAccent),
                     ),
-                    border: const OutlineInputBorder(),
-                    hintText: 'Choose A Password',
-                    prefixIcon: const Icon(Icons.key_rounded),
-                    suffixIcon: IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.login_sharp),
-                    ),
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter Password',
+                    prefixIcon: Icon(Icons.key),
+                    // suffixIcon: Icon(Icons.login_sharp),
                   ),
                 ),
               ),
+              //Password Ver
               Padding(
                 padding: const EdgeInsets.all(14.0),
                 child: TextField(
-                  obscureText: true,
-                  // controller: _textControllerEmail,
-                  decoration: InputDecoration(
+                  controller: _textControllerPasswordVer,
+                  onSubmitted: (val) {
+                    passWordver = val;
+                  },
+                  decoration: const InputDecoration(
                     prefixIconColor: Colors.orangeAccent,
                     suffixIconColor: Colors.orangeAccent,
-                    focusedBorder: const OutlineInputBorder(
+                    focusedBorder: OutlineInputBorder(
                       borderSide:
                           BorderSide(color: Colors.orangeAccent, width: 2.0),
                     ),
-                    enabledBorder: const OutlineInputBorder(
+                    enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.orangeAccent),
                     ),
-                    border: const OutlineInputBorder(),
-                    hintText: 'Confirm Password',
-                    prefixIcon: const Icon(Icons.key),
-                    suffixIcon: IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.login_sharp),
-                    ),
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter Your Email',
+                    prefixIcon: Icon(Icons.alternate_email_outlined),
+                    // suffixIcon: Icon(Icons.login_sharp),
                   ),
                 ),
               ),
@@ -153,7 +202,21 @@ class _SignUpState extends State<SignUp> {
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.amberAccent),
                     // style: ButtonStyle(backgroundColor: Color(Colors.accents)),
-                    onPressed: () {},
+                    onPressed: () {
+                      print('pressed');
+                      if (passWordver == ref.read(userPassword) &&
+                          ref.read(userEmail) != 'null' &&
+                          ref.read(userName) != 'null') {
+                        print(_textControllerEmail.toString());
+                        print(_textControllerName.toString());
+                        print(_textControllerPassword.toString());
+                        print(_textControllerPasswordVer.toString());
+                        print(ref.read(userEmail));
+                        print(ref.read(userName));
+                        print(ref.read(userPassword));
+                        signUp();
+                      }
+                    },
                     child: const Text(
                       'Agree & Continue',
                       style: TextStyle(

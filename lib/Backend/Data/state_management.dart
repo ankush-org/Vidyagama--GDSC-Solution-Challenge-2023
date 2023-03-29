@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 //Auth
 final userEmail = StateProvider((ref) => 'null');
 final userPassword = StateProvider((ref) => 'null');
+final userName = StateProvider((ref) => 'null');
 final user = StateProvider((ref) => "");
 
 //Provider for handling the index of bottom navigation bar
