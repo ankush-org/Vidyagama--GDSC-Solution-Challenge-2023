@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gsc/Pages/Auth/P0_startup.dart';
 import 'package:lottie/lottie.dart';
 import 'package:sign_in_button/sign_in_button.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,19 +15,27 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        leading: IconButton(
+            onPressed: () {
+              Navigator.of(context).pushReplacement(MaterialPageRoute(
+                builder: (BuildContext context) => const InitPage(),
+              ));
+            },
+            icon: Icon(Icons.arrow_back)),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               //Sign-Up Text
-              Padding(
-                padding: EdgeInsets.only(top: 30),
-                child: Text(
-                  'Sign-Up',
-                  style: GoogleFonts.ubuntu(
-                      fontSize: 50, fontWeight: FontWeight.bold),
-                ),
+              Text(
+                'Sign-Up',
+                style: GoogleFonts.ubuntu(
+                    fontSize: 50, fontWeight: FontWeight.bold),
               ),
               LottieBuilder.network(
                 'https://assets4.lottiefiles.com/packages/lf20_Cm5ERobRJM.json',

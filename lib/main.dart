@@ -28,26 +28,25 @@ class BaseMaterialApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        theme: ThemeData(primarySwatch: Colors.grey),
-        darkTheme: ThemeData.dark(),
-        navigatorKey: navigatorKey,
-        debugShowCheckedModeBanner: false,
-        home: InitPage()
-        // StreamBuilder<User?>(
-        //   stream: FirebaseAuth.instance.authStateChanges(),
-        //   builder: (context, snapshot) {
-        //     if (snapshot.hasData) {
-        //       return const HomeScaffold();
-        //     } else if (snapshot.connectionState == ConnectionState.waiting) {
-        //       return const Center(child: CircularProgressIndicator());
-        //     } else if (snapshot.hasError) {
-        //       return const Center(child: Text(("Error")));
-        //     } else {
-        //       return const InitPage();
-        //     }
-        //   },
-        // ),
-        );
+      theme: ThemeData(primarySwatch: Colors.grey),
+      darkTheme: ThemeData.dark(),
+      navigatorKey: navigatorKey,
+      debugShowCheckedModeBanner: false,
+      home: StreamBuilder<User?>(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return const HomeScaffold();
+          } else if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return const Center(child: Text(("Error")));
+          } else {
+            return const InitPage();
+          }
+        },
+      ),
+    );
     //Alternate Routing
     //     MaterialApp.router(
     //   debugShowCheckedModeBanner: false,

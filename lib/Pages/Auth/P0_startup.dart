@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gsc/Pages/Auth/P2A_sign_up.dart';
 import '../../Backend/Data/state_management.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -22,7 +23,7 @@ class _P0State extends ConsumerState<InitPage> {
   final _textControllerPassword = TextEditingController();
 
   //Auth
-  // final user = FirebaseAuth.instance.currentUser;
+  final user = FirebaseAuth.instance.currentUser;
 
   Future signIn() async {
     //sign-in loading dialog
@@ -60,8 +61,8 @@ class _P0State extends ConsumerState<InitPage> {
   @override
   Widget build(BuildContext context) {
     //TMP Vars
-    String? debugEmail = ref.watch(userEmail);
-    String? debugPassword = ref.watch(userPassword);
+    // String? debugEmail = ref.watch(userEmail);
+    // String? debugPassword = ref.watch(userPassword);
 
     //Scaffold
     return Scaffold(
@@ -84,10 +85,6 @@ class _P0State extends ConsumerState<InitPage> {
                   fontSize: 45,
                   fontWeight: FontWeight.bold,
                 ),
-                // TextStyle(
-                //   fontSize: 45,
-                //   fontWeight: FontWeight.bold,
-                // ),
               ),
               //Animation
               Lottie.network(
@@ -99,6 +96,7 @@ class _P0State extends ConsumerState<InitPage> {
                 width: 380,
                 child: SignInButton(
                   Buttons.google,
+                  text: 'Continue With Google',
                   onPressed: () {},
                 ),
               ),
@@ -110,29 +108,33 @@ class _P0State extends ConsumerState<InitPage> {
                 padding: const EdgeInsets.all(14.0),
                 child: TextField(
                   controller: _textControllerEmail,
-                  decoration: InputDecoration(
-                    prefixIconColor: Colors.orangeAccent,
-                    suffixIconColor: Colors.orangeAccent,
-                    focusedBorder: const OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: Colors.orangeAccent, width: 2.0),
-                    ),
-                    enabledBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.orangeAccent),
-                    ),
-                    border: const OutlineInputBorder(),
-                    hintText: 'Enter email',
-                    prefixIcon: const Icon(Icons.alternate_email_outlined),
-                    suffixIcon: IconButton(
-                      onPressed: () {
+                  onSubmitted: (val) {
+                    setState(
+                      () {
                         if (_textControllerEmail.text != '') {
                           ref.read(userEmail.notifier).update(
                                 (state) => _textControllerEmail.text,
                               );
                         }
                       },
-                      icon: const Icon(Icons.login_sharp),
+                    );
+                  },
+                  decoration: const InputDecoration(
+                    prefixIconColor: Colors.orangeAccent,
+                    suffixIconColor: Colors.orangeAccent,
+                    focusedBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Colors.orangeAccent, width: 2.0),
                     ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.orangeAccent),
+                    ),
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter email',
+                    prefixIcon: Icon(Icons.alternate_email_outlined),
+                    // suffixIcon: ref.read(userEmail) != ''
+                    //     ? const Icon(Icons.login_sharp)
+                    //     : null,
                   ),
                 ),
               ),
@@ -141,6 +143,18 @@ class _P0State extends ConsumerState<InitPage> {
                 padding: const EdgeInsets.all(14.0),
                 child: TextField(
                   controller: _textControllerPassword,
+                  onSubmitted: (val) {
+                    setState(
+                      () {
+                        if (_textControllerPassword.text != '') {
+                          ref.read(userPassword.notifier).update(
+                                (state) => _textControllerPassword.text,
+                              );
+                          signIn();
+                        }
+                      },
+                    );
+                  },
                   decoration: InputDecoration(
                     prefixIconColor: Colors.orangeAccent,
                     suffixIconColor: Colors.orangeAccent,
@@ -154,16 +168,9 @@ class _P0State extends ConsumerState<InitPage> {
                     border: const OutlineInputBorder(),
                     hintText: 'Enter Password',
                     prefixIcon: const Icon(Icons.key_rounded),
-                    suffixIcon: IconButton(
-                      onPressed: () {
-                        if (_textControllerPassword.text != '') {
-                          ref.read(userPassword.notifier).update(
-                                (state) => _textControllerPassword.text,
-                              );
-                        }
-                      },
-                      icon: const Icon(Icons.login_sharp),
-                    ),
+                    suffixIcon: ref.read(userPassword) != 'null'
+                        ? const Icon(Icons.login_sharp)
+                        : null,
                   ),
                 ),
               ),
@@ -171,56 +178,26 @@ class _P0State extends ConsumerState<InitPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Padding(
-                  //   padding: const EdgeInsets.all(2.0),
-                  //   child: ElevatedButton.icon(
-                  //       onPressed: () {
-                  //         signIn();
-                  //       },
-                  //       icon: const Icon(Icons.email),
-                  //       label: const Text('Sign-in')),
-                  // ),
-                  // Padding(
-                  //   padding: const EdgeInsets.all(2.0),
-                  //   child: ElevatedButton.icon(
-                  //       onPressed: () {},
-                  //       icon: const Icon(Icons.email),
-                  //       label: const Text('Sign-Up')),
-                  // ),
-                  // Padding(
-                  //   padding: const EdgeInsets.all(2.0),
-                  //   child: ElevatedButton.icon(
-                  //       onPressed: () {},
-                  //       icon: const Icon(Icons.email),
-                  //       label: const Text('Sign-Out')),
-                  // )
                   Row(
-                    children: const [
-                      Text("Don't have an account? "),
-                      Text(
-                        "Sign-Up",
-                        style: TextStyle(
-                          decoration: TextDecoration.underline,
-                          color: Color.fromARGB(255, 244, 86, 13),
+                    children: [
+                      const Text("Don't have an account? "),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context)
+                              .pushReplacement(MaterialPageRoute(
+                            builder: (BuildContext context) => const SignUp(),
+                          ));
+                        },
+                        child: const Text(
+                          "Sign-Up",
+                          style: TextStyle(
+                            decoration: TextDecoration.underline,
+                            color: Color.fromARGB(255, 244, 86, 13),
+                          ),
                         ),
                       ),
                     ],
                   )
-                  // RichText(
-                  //   text: const TextSpan(
-                  //     children: [
-                  //       TextSpan(
-                  //         // recognizer: TapGestureRecognizer()..onTap = widget.onClickedSignUp,
-                  //         text: 'No Account?',
-                  //         style: TextStyle(
-                  //           decoration: TextDecoration.underline,
-                  //           color: Colors.blue,
-                  //         ),
-                  //         children: [TextSpan(text: 'Sign Up?')],
-                  //       )
-                  //     ],
-                  //   ),
-                  // )
                 ],
               ),
             ],
