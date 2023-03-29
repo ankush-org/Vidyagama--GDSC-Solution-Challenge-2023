@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gsc/Pages/Auth/P2A_sign_up.dart';
+import 'package:gsc/Pages/Auth/auth_google.dart';
 import '../../Backend/Data/state_management.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -99,7 +100,9 @@ class _P0State extends ConsumerState<InitPage> {
                 child: SignInButton(
                   Buttons.google,
                   text: 'Continue With Google',
-                  onPressed: () {},
+                  onPressed: () {
+                    GoogleAuth().signInWithGoogle();
+                  },
                 ),
               ),
               const SizedBox(
