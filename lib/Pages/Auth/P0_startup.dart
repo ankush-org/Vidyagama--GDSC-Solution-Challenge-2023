@@ -69,6 +69,7 @@ class _P0State extends ConsumerState<InitPage> {
 
     //Scaffold
     return Scaffold(
+      backgroundColor: Colors.black,
       body:
           // SingleChildScrollView(
           //   child:
@@ -85,18 +86,18 @@ class _P0State extends ConsumerState<InitPage> {
               Text(
                 'Vidyagamah',
                 style: GoogleFonts.satisfy(
-                  fontSize: 45,
-                  fontWeight: FontWeight.bold,
-                ),
+                    fontSize: 45,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
               ),
               //Animation
               Lottie.network(
-                  'https://assets9.lottiefiles.com/packages/lf20_e6qptb87.json'),
+                  'https://assets6.lottiefiles.com/packages/lf20_ggt4iszh.json'),
               //Sign-in with google
               Container(
                 color: Colors.blue,
                 height: 60,
-                width: 380,
+                width: 360,
                 child: SignInButton(
                   Buttons.google,
                   text: 'Continue With Google',
@@ -112,6 +113,7 @@ class _P0State extends ConsumerState<InitPage> {
               Padding(
                 padding: const EdgeInsets.all(14.0),
                 child: TextField(
+                  style: const TextStyle(color: Colors.white),
                   controller: _textControllerEmail,
                   onSubmitted: (val) {
                     setState(
@@ -136,6 +138,7 @@ class _P0State extends ConsumerState<InitPage> {
                     ),
                     border: OutlineInputBorder(),
                     hintText: 'Enter email',
+                    hintStyle: TextStyle(color: Colors.white),
                     prefixIcon: Icon(Icons.alternate_email_outlined),
                     // suffixIcon: ref.read(userEmail) != ''
                     //     ? const Icon(Icons.login_sharp)
@@ -147,6 +150,7 @@ class _P0State extends ConsumerState<InitPage> {
               Padding(
                 padding: const EdgeInsets.all(14.0),
                 child: TextField(
+                  style: const TextStyle(color: Colors.white),
                   controller: _textControllerPassword,
                   onSubmitted: (val) {
                     setState(
@@ -172,6 +176,7 @@ class _P0State extends ConsumerState<InitPage> {
                     ),
                     border: const OutlineInputBorder(),
                     hintText: 'Enter Password',
+                    hintStyle: TextStyle(color: Colors.white),
                     prefixIcon: const Icon(Icons.key_rounded),
                     suffixIcon: ref.read(userPassword) != 'null'
                         ? const Icon(Icons.login_sharp)
@@ -185,7 +190,10 @@ class _P0State extends ConsumerState<InitPage> {
                 children: [
                   Row(
                     children: [
-                      const Text("Don't have an account? "),
+                      const Text(
+                        "Don't have an account? ",
+                        style: TextStyle(color: Colors.white),
+                      ),
                       GestureDetector(
                         onTap: () {
                           Navigator.of(context)
@@ -197,7 +205,7 @@ class _P0State extends ConsumerState<InitPage> {
                           "Sign-Up",
                           style: TextStyle(
                             decoration: TextDecoration.underline,
-                            color: Color.fromARGB(255, 244, 86, 13),
+                            color: Colors.amberAccent,
                           ),
                         ),
                       ),

@@ -20,6 +20,7 @@ class _OnBoardingState extends State<OnBoarding> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -30,7 +31,7 @@ class _OnBoardingState extends State<OnBoarding> {
                 height: 20,
               ),
               LottieBuilder.network(
-                  'https://assets4.lottiefiles.com/packages/lf20_D7l6QPTtOL.json'),
+                  'https://assets6.lottiefiles.com/packages/lf20_D7l6QPTtOL.json'),
               const SizedBox(
                 height: 20,
               ),
@@ -38,7 +39,9 @@ class _OnBoardingState extends State<OnBoarding> {
                 child: Text(
                   " 'शिक्षा विना न मुक्ति:।' ",
                   style: GoogleFonts.tiroDevanagariSanskrit(
-                      fontSize: 30, fontWeight: FontWeight.bold),
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
                 ),
               ),
               const SizedBox(
@@ -47,7 +50,9 @@ class _OnBoardingState extends State<OnBoarding> {
               Text(
                 "'There is no freedom without education'",
                 style: GoogleFonts.eduNswActFoundation(
-                    fontSize: 20, fontWeight: FontWeight.bold),
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
               ),
               const SizedBox(
                 height: 30,
@@ -55,7 +60,9 @@ class _OnBoardingState extends State<OnBoarding> {
               Text(
                 'Select Topics You May Like',
                 style: GoogleFonts.ubuntu(
-                    fontSize: 25, fontWeight: FontWeight.bold),
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
               ),
               const SizedBox(
                 height: 15,
@@ -83,7 +90,7 @@ class _OnBoardingState extends State<OnBoarding> {
                   width: 270,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.amberAccent),
+                        backgroundColor: Colors.orangeAccent),
                     // style: ButtonStyle(backgroundColor: Color(Colors.accents)),
                     onPressed: () {},
                     child: const Text(
