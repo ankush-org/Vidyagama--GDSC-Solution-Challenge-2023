@@ -16,9 +16,10 @@ class TestPage extends StatefulWidget {
 
 class _TestPageState extends State<TestPage> {
   //Variables
-  String? mcq;
-  String? answer;
+  String? mcq = '';
+  String? answer = '';
   String? promptResponse = '';
+  int? sessionScore = 0;
 
   final _textControllerAns = TextEditingController();
 
@@ -30,7 +31,7 @@ class _TestPageState extends State<TestPage> {
     //Prompting for Quesn Generation
     print('Question prompted'); //Debug
     final request = CompleteText(
-      prompt: 'Ask another question in C language',
+      prompt: 'Ask another question on General Knowledge',
       model: kTranslateModelV3,
     );
     final response = await chatGPT!.onCompleteText(request: request);
@@ -47,7 +48,7 @@ class _TestPageState extends State<TestPage> {
     //prompting for an answer review
     final request2 = CompleteText(
       prompt:
-          'analyze and tell if answer - $answer is correct answer to question - $mcq, and also explain why I am wrong and give me a score out of 100',
+          'analyze and tell if answer - $answer is correct answer to question - $mcq, and also explain why I am wrong and give me a percentage score',
       model: kTranslateModelV3,
     );
     final response = await chatGPT!.onCompleteText(request: request2);
@@ -55,6 +56,26 @@ class _TestPageState extends State<TestPage> {
     setState(
       () {
         promptResponse = response.choices[0].text;
+        int startingid = response.choices[0].text.indexOf('%');
+        print(startingid);
+        if (response.choices[0].text.toString()[startingid - 2] != ' ' &&
+            response.choices[0].text.toString()[startingid - 3] != ' ') {
+          print('triple');
+          print(response.choices[0].text
+              .toString()
+              .substring(startingid - 3, startingid));
+        } else if (response.choices[0].text.toString()[startingid - 2] != ' ' &&
+            response.choices[0].text.toString()[startingid - 1] != ' ') {
+          print('double');
+          print(response.choices[0].text
+              .toString()
+              .substring(startingid - 2, startingid));
+        } else {
+          print(response.choices[0].text
+              .toString()
+              .substring(startingid - 1, startingid));
+        }
+        // sessionScore = response.choices[0].text;
       },
     );
   }
@@ -104,33 +125,64 @@ class _TestPageState extends State<TestPage> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    Center(
-                      child: Container(
-                        height: 600,
-                        width: 360,
-                        color: Colors.white,
-                        child: Column(
-                          children: [
-                            Center(
-                              child: Text(
-                                '$mcq',
-                                style: GoogleFonts.aBeeZee(color: Colors.black),
+                    SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Center(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.black,
+                                  border: Border.all(
+                                    color: Colors.orangeAccent,
+                                    width: 1.5,
+                                  )),
+                              height: 550,
+                              width: 362,
+                              // color: Colors.white,
+                              child: Column(
+                                children: [
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  Center(
+                                    child: Text(
+                                      'Question',
+                                      style: GoogleFonts.ubuntu(
+                                          color: Colors.white, fontSize: 22),
+                                    ),
+                                  ),
+                                  Center(
+                                    child: Text(
+                                      '$mcq',
+                                      style: GoogleFonts.aBeeZee(
+                                          color: Colors.white, fontSize: 15),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 30,
+                                  ),
+                                  Center(
+                                    child: Text(
+                                      'Assesment: ',
+                                      style: GoogleFonts.ubuntu(
+                                          color: Colors.white, fontSize: 22),
+                                    ),
+                                  ),
+                                  Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        '$promptResponse',
+                                        style: GoogleFonts.aBeeZee(
+                                            color: Colors.white),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                            Center(
-                              child: Container(
-                                height: 200,
-                                width: 300,
-                                color: Colors.white,
-                                child: Text(
-                                  '$promptResponse',
-                                  style:
-                                      GoogleFonts.aBeeZee(color: Colors.black),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                     Padding(
@@ -146,33 +198,56 @@ class _TestPageState extends State<TestPage> {
                             },
                           );
                         },
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           prefixIconColor: Colors.orangeAccent,
-                          suffixIconColor: Colors.orangeAccent,
-                          focusedBorder: OutlineInputBorder(
+                          focusedBorder: const OutlineInputBorder(
                             borderSide: BorderSide(
                                 color: Colors.orangeAccent, width: 2.0),
                           ),
-                          enabledBorder: OutlineInputBorder(
+                          enabledBorder: const OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.orangeAccent),
                           ),
-                          border: OutlineInputBorder(),
+                          // border: OutlineInputBorder(),
+                          hintStyle: const TextStyle(color: Colors.white),
                           hintText: 'Enter Your Answer',
-                          prefixIcon: Icon(Icons.data_array),
+                          prefixIcon: const Icon(Icons.data_array),
+                          suffixIcon: GestureDetector(
+                            onTap: () {
+                              _textControllerAns.clear();
+                            },
+                            child: const Icon(
+                              Icons.close,
+                              color: Colors.white,
+                            ),
+                          ),
                         ),
                       ),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 8.0),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            mcq = '';
+                            answer = '';
+                            promptResponse = '';
+                          });
+
+                          generateQsn();
+                        },
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.amberAccent),
+                        child: Text(
+                          'Generate Question',
+                          style: GoogleFonts.ubuntu(
+                              color: Colors.black, fontSize: 17),
+                        ),
+                      ),
+                    )
                   ],
                 ),
               ),
             );
-          },
-        ),
-        floatingActionButton: Consumer(
-          builder: (context, ref, child) {
-            return FloatingActionButton(onPressed: () async {
-              generateQsn();
-            });
           },
         ),
       ),

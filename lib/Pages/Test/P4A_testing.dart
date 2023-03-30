@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:gsc/Pages/Test/test_overview_card.dart';
 import '../../Backend/Routes/app_route_constants.dart';
 import '../../Backend/Data/state_management.dart';
 import '../Home/topic_selection_card.dart';
@@ -16,6 +17,11 @@ class Testing extends StatefulWidget {
 }
 
 class _TestingState extends State<Testing> {
+  final List progressList = [
+    ['Law & Ethics', 0.78, 0.26],
+    ['Environmental Science', 0.92, 0.66],
+    ['Elementary Mathematics', 0.64, 0.46],
+  ];
   final List topicList = [
     ['Elementary Mathematics', 'math.jpg', Colors.red, 2],
     ['Environmental Science', 'env.jpg', Colors.green, 2],
@@ -58,13 +64,34 @@ class _TestingState extends State<Testing> {
                   ),
                 ),
               ),
-              Container(
+              //Listview of Topics
+              SizedBox(
                 height: 200,
-                margin: const EdgeInsets.only(left: 8, right: 8),
-                decoration: BoxDecoration(
-                    color: const Color.fromARGB(250, 207, 247, 123),
-                    borderRadius: BorderRadius.circular(20)),
+                child: ListView.builder(
+                  itemCount: progressList.length,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    return TestOverViewCard(
+                      topicName: progressList[index][0],
+                      currentGrowth: progressList[index][1],
+                      allTimeGrowth: progressList[index][2],
+                    );
+                    // TopicCard(
+                    //   topicName: topicList[index][0],
+                    //   imgName: topicList[index][1],
+                    //   barColor: topicList[index][2],
+                    //   navId: topicList[index][3],
+                    // );
+                  },
+                ),
               ),
+              // Container(
+              //   height: 200,
+              //   margin: const EdgeInsets.only(left: 8, right: 8),
+              //   decoration: BoxDecoration(
+              //       color: const Color.fromARGB(250, 207, 247, 123),
+              //       borderRadius: BorderRadius.circular(20)),
+              // ),
               Container(
                 padding: const EdgeInsets.only(left: 10, top: 20),
                 height: 60,

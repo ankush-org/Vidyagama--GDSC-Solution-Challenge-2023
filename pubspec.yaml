@@ -48,6 +48,7 @@ dependencies:
   sign_in_button: ^3.2.0
   google_fonts: ^4.0.3
   google_sign_in: ^6.0.2
+  percent_indicator: ^4.2.3
 
 dev_dependencies:
   flutter_test:
