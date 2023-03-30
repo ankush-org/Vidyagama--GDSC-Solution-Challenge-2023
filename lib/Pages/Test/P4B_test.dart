@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gsc/Pages/BaseScaffold.dart';
 import 'package:gsc/Pages/Test/P4A_testing.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 
 // import '../../Backend/Data/state_management.dart';
 
@@ -19,7 +20,8 @@ class _TestPageState extends State<TestPage> {
   String? mcq = '';
   String? answer = '';
   String? promptResponse = '';
-  int? sessionScore = 0;
+  int sessionScore = 0;
+  int percentScore = 0;
 
   final _textControllerAns = TextEditingController();
 
@@ -31,7 +33,7 @@ class _TestPageState extends State<TestPage> {
     //Prompting for Quesn Generation
     print('Question prompted'); //Debug
     final request = CompleteText(
-      prompt: 'Ask another question on General Knowledge',
+      prompt: 'Ask another true/ false question on english grammar',
       model: kTranslateModelV3,
     );
     final response = await chatGPT!.onCompleteText(request: request);
@@ -61,21 +63,22 @@ class _TestPageState extends State<TestPage> {
         if (response.choices[0].text.toString()[startingid - 2] != ' ' &&
             response.choices[0].text.toString()[startingid - 3] != ' ') {
           print('triple');
-          print(response.choices[0].text
+
+          percentScore = int.parse(response.choices[0].text
               .toString()
               .substring(startingid - 3, startingid));
         } else if (response.choices[0].text.toString()[startingid - 2] != ' ' &&
             response.choices[0].text.toString()[startingid - 1] != ' ') {
           print('double');
-          print(response.choices[0].text
+          percentScore = int.parse(response.choices[0].text
               .toString()
               .substring(startingid - 2, startingid));
         } else {
-          print(response.choices[0].text
+          percentScore = int.parse(response.choices[0].text
               .toString()
               .substring(startingid - 1, startingid));
         }
-        // sessionScore = response.choices[0].text;
+        sessionScore += percentScore;
       },
     );
   }
@@ -125,6 +128,26 @@ class _TestPageState extends State<TestPage> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 6.0),
+                      child: LinearPercentIndicator(
+                        lineHeight: 45,
+                        width: 380,
+                        progressColor: Colors.redAccent,
+                        percent: (sessionScore / 1000).toDouble(),
+                        center: Text(
+                          'Streak Level: 1',
+                          style: GoogleFonts.pacifico(
+                              color: Colors.black, fontSize: 25),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
                     SingleChildScrollView(
                       child: Column(
                         children: [
@@ -136,7 +159,7 @@ class _TestPageState extends State<TestPage> {
                                     color: Colors.orangeAccent,
                                     width: 1.5,
                                   )),
-                              height: 550,
+                              height: 500,
                               width: 362,
                               // color: Colors.white,
                               child: Column(
@@ -178,6 +201,20 @@ class _TestPageState extends State<TestPage> {
                                       ),
                                     ),
                                   ),
+                                  Center(
+                                    child: Text(
+                                      '$percentScore',
+                                      style:
+                                          const TextStyle(color: Colors.white),
+                                    ),
+                                  ),
+                                  Center(
+                                    child: Text(
+                                      '$sessionScore',
+                                      style:
+                                          const TextStyle(color: Colors.white),
+                                    ),
+                                  )
                                 ],
                               ),
                             ),
@@ -227,12 +264,13 @@ class _TestPageState extends State<TestPage> {
                       padding: const EdgeInsets.only(bottom: 8.0),
                       child: ElevatedButton(
                         onPressed: () {
-                          setState(() {
-                            mcq = '';
-                            answer = '';
-                            promptResponse = '';
-                          });
-
+                          setState(
+                            () {
+                              mcq = '';
+                              answer = '';
+                              promptResponse = '';
+                            },
+                          );
                           generateQsn();
                         },
                         style: ElevatedButton.styleFrom(

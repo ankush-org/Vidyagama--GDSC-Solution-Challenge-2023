@@ -33,10 +33,10 @@ class TestOverViewCard extends StatelessWidget {
             height: 320,
             width: 350,
             child: FittedBox(
+              fit: BoxFit.fill,
               child: Image.asset("lib/assets/test.jpg",
                   color: const Color.fromRGBO(255, 255, 255, 0.2),
                   colorBlendMode: BlendMode.modulate),
-              fit: BoxFit.fill,
             ),
             // color: Colors.white,
           ),

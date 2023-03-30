@@ -41,7 +41,6 @@ class _TestingState extends State<Testing> {
             "Examinations",
             style: GoogleFonts.ubuntu(
                 fontSize: 40, fontWeight: FontWeight.bold, color: Colors.white),
-            //  TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
           ),
         ),
         //UI
@@ -76,22 +75,9 @@ class _TestingState extends State<Testing> {
                       currentGrowth: progressList[index][1],
                       allTimeGrowth: progressList[index][2],
                     );
-                    // TopicCard(
-                    //   topicName: topicList[index][0],
-                    //   imgName: topicList[index][1],
-                    //   barColor: topicList[index][2],
-                    //   navId: topicList[index][3],
-                    // );
                   },
                 ),
               ),
-              // Container(
-              //   height: 200,
-              //   margin: const EdgeInsets.only(left: 8, right: 8),
-              //   decoration: BoxDecoration(
-              //       color: const Color.fromARGB(250, 207, 247, 123),
-              //       borderRadius: BorderRadius.circular(20)),
-              // ),
               Container(
                 padding: const EdgeInsets.only(left: 10, top: 20),
                 height: 60,
