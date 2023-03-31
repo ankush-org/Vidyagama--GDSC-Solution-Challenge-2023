@@ -33,7 +33,7 @@ class _TestPageState extends State<TestPage> {
     //Prompting for Quesn Generation
     print('pressed'); //Debug
     final request = CompleteText(
-        prompt: 'Ask a subjective question on matter',
+        prompt: 'Ask a subjective question on hydrogen',
         model: kTranslateModelV3);
     final response = await chatGPT!.onCompleteText(request: request);
     print(response!.choices[0].text); //Debug
