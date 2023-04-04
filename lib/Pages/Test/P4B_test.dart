@@ -33,8 +33,7 @@ class _TestPageState extends State<TestPage> {
     //Prompting for Quesn Generation
     print('pressed'); //Debug
     final request = CompleteText(
-        prompt: 'Ask a subjective question on hydrogen',
-        model: kTranslateModelV3);
+        prompt: 'Ask a question on basic addition', model: kTranslateModelV3);
     final response = await chatGPT!.onCompleteText(request: request);
     print(response!.choices[0].text); //Debug
     setState(
@@ -49,7 +48,7 @@ class _TestPageState extends State<TestPage> {
     //prompting for an answer review
     final request2 = CompleteText(
       prompt:
-          'analyze and tell if answer - $answer is correct answer to question - $mcq, and also explain why I am wrong and give me a percentage score',
+          'Just tell if "${int.parse(answer.toString())}" is correct answer to the question "$mcq", and give me a percentage score, do not explain the solution',
       model: kTranslateModelV3,
     );
     final response = await chatGPT!.onCompleteText(request: request2);
@@ -197,18 +196,18 @@ class _TestPageState extends State<TestPage> {
                                   ),
                                 ),
                               ),
-                              Center(
-                                child: Text(
-                                  '$percentScore',
-                                  style: const TextStyle(color: Colors.white),
-                                ),
-                              ),
-                              Center(
-                                child: Text(
-                                  '$sessionScore',
-                                  style: const TextStyle(color: Colors.white),
-                                ),
-                              )
+                              // Center(
+                              //   child: Text(
+                              //     '$percentScore',
+                              //     style: const TextStyle(color: Colors.white),
+                              //   ),
+                              // ),
+                              // Center(
+                              //   child: Text(
+                              //     '$sessionScore',
+                              //     style: const TextStyle(color: Colors.white),
+                              //   ),
+                              // )
                             ],
                           ),
                         ),

@@ -36,8 +36,7 @@ class _VideoPlayerHomeState extends State<VideoPlayerHome> {
     //Prompting for Quesn Generation
     print('pressed'); //Debug
     final request = CompleteText(
-        prompt: 'Ask a subjective question on matter',
-        model: kTranslateModelV3);
+        prompt: 'Ask a question on basic addition', model: kTranslateModelV3);
     final response = await chatGPT!.onCompleteText(request: request);
     print(response!.choices[0].text); //Debug
     setState(
@@ -71,7 +70,7 @@ class _VideoPlayerHomeState extends State<VideoPlayerHome> {
     //prompting for an answer review
     final request2 = CompleteText(
       prompt:
-          'analyze and tell if answer - $answer is correct answer to question - $mcq, and also explain why I am wrong and give me a percentage score',
+          'Just tell if "${int.parse(answer.toString())}" is correct answer to the question "$mcq", and give me a percentage score, do not explain the solution',
       model: kTranslateModelV3,
     );
     final response = await chatGPT!.onCompleteText(request: request2);
@@ -202,7 +201,7 @@ class _VideoPlayerHomeState extends State<VideoPlayerHome> {
                         Padding(
                           padding: const EdgeInsets.only(top: 12.0, left: 10),
                           child: Text(
-                            'Plastic pollution is one of the most significant environmental issues of our time. Plastic waste can take hundreds of years to decompose, and when it does, it releases harmful chemicals that can pollute our soil, water, and air. Plastic pollution also harms wildlife, as animals can become entangled in plastic debris or mistake it for food, leading to injury or death.',
+                            'Addition in math is a process of combining two or more numbers. Addends are the numbers being added, and the result or the final answer we get after the process is called the sum. It is one of the essential mathematical functions we use in our everyday activities. There are many situations in which we add numbers. One of the most common everyday uses for adding numbers is when we work with time or money—for example, adding up bills and receipts.',
                             style: GoogleFonts.ubuntu(color: Colors.white),
                           ),
                         ),

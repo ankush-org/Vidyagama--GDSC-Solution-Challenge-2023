@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gsc/Pages/Auth/topic_selection_card_with_toggle.dart';
+import 'package:gsc/Pages/BaseScaffold.dart';
 import 'package:lottie/lottie.dart';
+
+import 'P0_startup.dart';
 
 class OnBoarding extends StatefulWidget {
   const OnBoarding({super.key});
@@ -20,6 +23,21 @@ class _OnBoardingState extends State<OnBoarding> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 30,
+        backgroundColor: Colors.black,
+        elevation: 0,
+        leading: IconButton(
+            onPressed: () {
+              Navigator.of(context).pushReplacement(MaterialPageRoute(
+                builder: (BuildContext context) => const InitPage(),
+              ));
+            },
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            )),
+      ),
       backgroundColor: Colors.black,
       body: SafeArea(
         child: SingleChildScrollView(
@@ -92,7 +110,11 @@ class _OnBoardingState extends State<OnBoarding> {
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.orangeAccent),
                     // style: ButtonStyle(backgroundColor: Color(Colors.accents)),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (BuildContext context) => const HomeScaffold(),
+                      ));
+                    },
                     child: const Text(
                       'Continue',
                       style: TextStyle(
