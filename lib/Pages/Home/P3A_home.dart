@@ -11,6 +11,7 @@ import 'package:gsc/Pages/Home/topic_selection_card.dart';
 
 import '../../Backend/Data/state_management.dart';
 import '../../Backend/Routes/app_route_constants.dart';
+import './battle_card_template.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -92,7 +93,7 @@ class _HomeState extends State<Home> {
                     itemCount: battleList.length,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
-                      return BattleCard(
+                      return BattleWidget(
                         pfp1: battleList[index][0],
                         pfp2: battleList[index][1],
                         topicName: battleList[index][2],
