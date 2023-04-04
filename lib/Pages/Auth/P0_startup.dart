@@ -2,7 +2,9 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gsc/Pages/Auth/P2A_sign_up.dart';
+import 'package:gsc/Pages/Auth/P2B_topics.dart';
 import 'package:gsc/Pages/Auth/auth_google.dart';
+import 'package:gsc/Pages/BaseScaffold.dart';
 import '../../Backend/Data/state_management.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -153,6 +155,9 @@ class _P0State extends ConsumerState<InitPage> {
                   style: const TextStyle(color: Colors.white),
                   controller: _textControllerPassword,
                   onSubmitted: (val) {
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (BuildContext context) => const HomeScaffold(),
+                    ));
                     setState(
                       () {
                         if (_textControllerPassword.text != '') {
