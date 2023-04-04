@@ -4,18 +4,19 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gsc/Pages/BaseScaffold.dart';
 import 'package:gsc/Pages/Test/P4A_testing.dart';
+import 'package:lottie/lottie.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 // import '../../Backend/Data/state_management.dart';
 
-class TestPage extends StatefulWidget {
-  const TestPage({super.key});
+class Battles extends StatefulWidget {
+  const Battles({super.key});
 
   @override
-  State<TestPage> createState() => _TestPageState();
+  State<Battles> createState() => _BattlesState();
 }
 
-class _TestPageState extends State<TestPage> {
+class _BattlesState extends State<Battles> {
   //Variables
   String? mcq = '';
   String? answer = '';
@@ -124,6 +125,8 @@ class _TestPageState extends State<TestPage> {
           child: SingleChildScrollView(
             child: Column(
               children: [
+                LottieBuilder.network(
+                    'https://assets10.lottiefiles.com/packages/lf20_preMy3.json'),
                 const SizedBox(
                   height: 20,
                 ),
@@ -135,7 +138,7 @@ class _TestPageState extends State<TestPage> {
                     progressColor: Colors.redAccent,
                     percent: (sessionScore / 1000).toDouble(),
                     center: Text(
-                      'Streak Level: 1',
+                      'Your Score: $sessionScore',
                       style: GoogleFonts.pacifico(
                           color: Colors.black, fontSize: 25),
                     ),
@@ -155,7 +158,7 @@ class _TestPageState extends State<TestPage> {
                                 color: Colors.orangeAccent,
                                 width: 1.5,
                               )),
-                          height: 500,
+                          height: 420,
                           width: 362,
                           // color: Colors.white,
                           child: Column(
@@ -197,18 +200,18 @@ class _TestPageState extends State<TestPage> {
                                   ),
                                 ),
                               ),
-                              Center(
-                                child: Text(
-                                  '$percentScore',
-                                  style: const TextStyle(color: Colors.white),
-                                ),
-                              ),
-                              Center(
-                                child: Text(
-                                  '$sessionScore',
-                                  style: const TextStyle(color: Colors.white),
-                                ),
-                              )
+                              // Center(
+                              //   child: Text(
+                              //     '$percentScore',
+                              //     style: const TextStyle(color: Colors.white),
+                              //   ),
+                              // ),
+                              // Center(
+                              //   child: Text(
+                              //     '$sessionScore',
+                              //     style: const TextStyle(color: Colors.white),
+                              //   ),
+                              // )
                             ],
                           ),
                         ),
@@ -270,7 +273,7 @@ class _TestPageState extends State<TestPage> {
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.amberAccent),
                     child: Text(
-                      'Generate Question',
+                      'Start',
                       style:
                           GoogleFonts.ubuntu(color: Colors.black, fontSize: 17),
                     ),

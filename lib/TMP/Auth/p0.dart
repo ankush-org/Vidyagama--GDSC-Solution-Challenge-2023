@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../Backend/Data/state_management.dart';
+import '../../Backend/Data/state_management.dart';
 
 class P0 extends ConsumerStatefulWidget {
   const P0({super.key});
@@ -13,6 +13,13 @@ class _P0State extends ConsumerState<P0> {
   //Variables
   final _textControllerEmail = TextEditingController();
   final _textControllerPassword = TextEditingController();
+
+  @override
+  void dispose() {
+    // _textControllerEmail.dispose();
+    // _textControllerPassword.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
