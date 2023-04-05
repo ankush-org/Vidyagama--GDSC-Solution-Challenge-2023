@@ -8,6 +8,7 @@ import 'package:gsc/Pages/Test/test_overview_card.dart';
 import '../../Backend/Routes/app_route_constants.dart';
 import '../../Backend/Data/state_management.dart';
 import '../Home/topic_selection_card.dart';
+import './test_card_widget.dart';
 
 class Testing extends StatefulWidget {
   const Testing({super.key});
@@ -70,7 +71,7 @@ class _TestingState extends State<Testing> {
                   itemCount: progressList.length,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
-                    return TestOverViewCard(
+                    return TestCardWidget(
                       topicName: progressList[index][0],
                       currentGrowth: progressList[index][1],
                       allTimeGrowth: progressList[index][2],
