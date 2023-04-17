@@ -86,7 +86,9 @@ class _BattlesState extends State<Battles> {
   @override
   void initState() {
     chatGPT = OpenAI.instance.build(
-        token: "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",
+        // token: "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",
+        //updated api-key
+        token: "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",
         baseOption: HttpSetup(receiveTimeout: 60000));
     super.initState();
   }
@@ -133,7 +135,7 @@ class _BattlesState extends State<Battles> {
                   padding: const EdgeInsets.only(left: 6.0),
                   child: LinearPercentIndicator(
                     lineHeight: 45,
-                    width: 380,
+                    width: 350,
                     progressColor: Colors.redAccent,
                     percent: (sessionScore / 1000).toDouble(),
                     center: Text(
@@ -158,7 +160,7 @@ class _BattlesState extends State<Battles> {
                                 width: 1.5,
                               )),
                           height: 420,
-                          width: 362,
+                          width: 330,
                           // color: Colors.white,
                           child: Column(
                             children: [

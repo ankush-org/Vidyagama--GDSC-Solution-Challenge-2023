@@ -107,7 +107,9 @@ class _VideoPlayerHomeState extends State<VideoPlayerHome> {
   @override
   void initState() {
     chatGPT = OpenAI.instance.build(
-        token: "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",
+        // token: "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",
+        //updated api-key
+        token: "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",
         baseOption: HttpSetup(receiveTimeout: 60000));
     super.initState();
   }
@@ -217,205 +219,204 @@ class _VideoPlayerHomeState extends State<VideoPlayerHome> {
                     //Playlist Tab
                     Image.asset("lib/assets/plalist.jpg"),
                     //CLassroom Tab
-                    Container(
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 6.0),
-                              child: LinearPercentIndicator(
-                                lineHeight: 45,
-                                width: 380,
-                                progressColor: Colors.redAccent,
-                                percent: (sessionScore / 1000).toDouble(),
-                                center: Text(
-                                  'Classroom Score: $sessionScore',
-                                  style: GoogleFonts.pacifico(
-                                      color: Colors.black, fontSize: 25),
-                                ),
+                    SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 2.0),
+                            child: LinearPercentIndicator(
+                              lineHeight: 45,
+                              width: 355,
+                              progressColor: Colors.redAccent,
+                              percent: (sessionScore / 1000).toDouble(),
+                              center: Text(
+                                'Classroom Score: $sessionScore',
+                                style: GoogleFonts.pacifico(
+                                    color: Colors.black, fontSize: 25),
                               ),
                             ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            SingleChildScrollView(
-                              child: Column(
-                                children: [
-                                  Center(
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                          color: Colors.black,
-                                          border: Border.all(
-                                            color: Color.fromARGB(
-                                                255, 245, 225, 151),
-                                            width: 1.5,
-                                          )),
-                                      height: 220,
-                                      width: 362,
-                                      // color: Colors.white,
-                                      child: SingleChildScrollView(
-                                        child: Column(
-                                          children: [
-                                            const SizedBox(
-                                              height: 20,
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                Center(
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        color: Colors.black,
+                                        border: Border.all(
+                                          color: Color.fromARGB(
+                                              255, 245, 225, 151),
+                                          width: 1.5,
+                                        )),
+                                    height: 220,
+                                    width: 340,
+                                    // color: Colors.white,
+                                    child: SingleChildScrollView(
+                                      child: Column(
+                                        children: [
+                                          const SizedBox(
+                                            height: 20,
+                                          ),
+                                          Center(
+                                            child: Text(
+                                              'Question',
+                                              style: GoogleFonts.ubuntu(
+                                                  color: Colors.white,
+                                                  fontSize: 22),
                                             ),
-                                            Center(
-                                              child: Text(
-                                                'Question',
-                                                style: GoogleFonts.ubuntu(
-                                                    color: Colors.white,
-                                                    fontSize: 22),
-                                              ),
+                                          ),
+                                          Center(
+                                            child: Text(
+                                              '$mcq',
+                                              style: GoogleFonts.aBeeZee(
+                                                  color: Colors.white,
+                                                  fontSize: 15),
                                             ),
-                                            Center(
+                                          ),
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                          Center(
+                                            child: Text(
+                                              'Assesment: ',
+                                              style: GoogleFonts.ubuntu(
+                                                  color: Colors.white,
+                                                  fontSize: 22),
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            height: 3,
+                                          ),
+                                          Center(
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 8.0),
                                               child: Text(
-                                                '$mcq',
+                                                '$promptResponse',
                                                 style: GoogleFonts.aBeeZee(
-                                                    color: Colors.white,
-                                                    fontSize: 15),
+                                                    color: Colors.white),
                                               ),
                                             ),
-                                            const SizedBox(
-                                              height: 10,
-                                            ),
-                                            Center(
-                                              child: Text(
-                                                'Assesment: ',
-                                                style: GoogleFonts.ubuntu(
-                                                    color: Colors.white,
-                                                    fontSize: 22),
-                                              ),
-                                            ),
-                                            const SizedBox(
-                                              height: 3,
-                                            ),
-                                            Center(
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 8.0),
-                                                child: Text(
-                                                  '$promptResponse',
-                                                  style: GoogleFonts.aBeeZee(
-                                                      color: Colors.white),
-                                                ),
-                                              ),
-                                            ),
-                                            const SizedBox(
-                                              height: 20,
-                                            )
-                                            // Center(
-                                            //   child: Text(
-                                            //     '$percentScore',
-                                            //     style: const TextStyle(
-                                            //         color: Colors.white),
-                                            //   ),
-                                            // ),
-                                            // Center(
-                                            //   child: Text(
-                                            //     '$sessionScore',
-                                            //     style: const TextStyle(
-                                            //         color: Colors.white),
-                                            //   ),
-                                            // )
-                                          ],
-                                        ),
+                                          ),
+                                          const SizedBox(
+                                            height: 20,
+                                          )
+                                          // Center(
+                                          //   child: Text(
+                                          //     '$percentScore',
+                                          //     style: const TextStyle(
+                                          //         color: Colors.white),
+                                          //   ),
+                                          // ),
+                                          // Center(
+                                          //   child: Text(
+                                          //     '$sessionScore',
+                                          //     style: const TextStyle(
+                                          //         color: Colors.white),
+                                          //   ),
+                                          // )
+                                        ],
                                       ),
                                     ),
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(14.0),
-                              child: TextField(
-                                style: const TextStyle(color: Colors.white),
-                                controller: _textControllerAns,
-                                onSubmitted: (val) {
-                                  setState(
-                                    () {
-                                      answer = val;
-                                      generateAns();
-                                    },
-                                  );
-                                },
-                                decoration: InputDecoration(
-                                  prefixIconColor: Colors.orangeAccent,
-                                  focusedBorder: const OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color:
-                                            Color.fromARGB(255, 245, 225, 151),
-                                        width: 2.0),
-                                  ),
-                                  enabledBorder: const OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color:
-                                            Color.fromARGB(255, 245, 225, 151)),
-                                  ),
-                                  // border: OutlineInputBorder(),
-                                  hintStyle:
-                                      const TextStyle(color: Colors.white),
-                                  hintText: 'Enter Your Answer',
-                                  prefixIcon: const Icon(Icons.data_array),
-                                  suffixIcon: GestureDetector(
-                                    onTap: () {
-                                      _textControllerAns.clear();
-                                    },
-                                    child: const Icon(
-                                      Icons.close,
-                                      color: Colors.white,
-                                    ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(14.0),
+                            child: TextField(
+                              style: const TextStyle(color: Colors.white),
+                              controller: _textControllerAns,
+                              onSubmitted: (val) {
+                                setState(
+                                  () {
+                                    answer = val;
+                                    generateAns();
+                                  },
+                                );
+                              },
+                              decoration: InputDecoration(
+                                prefixIconColor: Colors.orangeAccent,
+                                focusedBorder: const OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 245, 225, 151),
+                                      width: 2.0),
+                                ),
+                                enabledBorder: const OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color:
+                                          Color.fromARGB(255, 245, 225, 151)),
+                                ),
+                                // border: OutlineInputBorder(),
+                                hintStyle: const TextStyle(color: Colors.white),
+                                hintText: 'Enter Your Answer',
+                                prefixIcon: const Icon(Icons.data_array),
+                                suffixIcon: GestureDetector(
+                                  onTap: () {
+                                    _textControllerAns.clear();
+                                  },
+                                  child: const Icon(
+                                    Icons.close,
+                                    color: Colors.white,
                                   ),
                                 ),
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 8.0),
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  setState(
-                                    () {
-                                      mcq = '';
-                                      answer = '';
-                                      promptResponse = '';
-                                    },
-                                  );
-                                  generateQsn();
-                                },
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor:
-                                        Color.fromARGB(255, 245, 225, 151)),
-                                child: Text(
-                                  'Get Assignment',
-                                  style: GoogleFonts.ubuntu(
-                                      color: Colors.black, fontSize: 17),
-                                ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 8.0),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                setState(
+                                  () {
+                                    mcq = '';
+                                    answer = '';
+                                    promptResponse = '';
+                                  },
+                                );
+                                generateQsn();
+                              },
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor:
+                                      Color.fromARGB(255, 245, 225, 151)),
+                              child: Text(
+                                'Get Assignment',
+                                style: GoogleFonts.ubuntu(
+                                    color: Colors.black, fontSize: 17),
                               ),
-                            )
-                          ],
-                        ),
+                            ),
+                          )
+                        ],
                       ),
                     ),
                     Container(
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                  color: Colors.black,
-                                  border: Border.all(
-                                    color: Color.fromARGB(255, 245, 225, 151),
-                                    width: 1.5,
-                                  )),
-                              height: 220,
-                              width: 362,
-                              child: Center(
-                                child: Text(
-                                  'Response $qsnResponse',
-                                  style: GoogleFonts.ubuntu(
-                                      color: Colors.white, fontSize: 17),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    color: Colors.black,
+                                    border: Border.all(
+                                      color: Color.fromARGB(255, 245, 225, 151),
+                                      width: 1.5,
+                                    )),
+                                height: 220,
+                                width: 340,
+                                child: Center(
+                                  child: Text(
+                                    'Response $qsnResponse',
+                                    style: GoogleFonts.ubuntu(
+                                        color: Colors.white, fontSize: 17),
+                                  ),
                                 ),
                               ),
                             ),
